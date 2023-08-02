@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class Role
 { 
+
+    /* 
+    * This Page is created by developer.Custom Middleware Page for role manageMent
+     */
     /**
      * Handle an incoming request.
      *

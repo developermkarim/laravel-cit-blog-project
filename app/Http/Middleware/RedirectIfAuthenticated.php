@@ -24,13 +24,24 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
 
+               /*
+                 * This  is created by developer.Custom code for breeze built in controller for role manageMent 
+                 * here we can many roles not to navigate to login page after logged in with their page based on roles
+                 * 
+                 */
+
+               
                 if (Auth::check() && Auth::user()->role == 'user') {
                     return redirect('/dashboard');
                 }
+
                  if (Auth::check() && Auth::user()->role == 'admin') {
                     return redirect('/admin/dashboard');
                 }
  
+                /* 
+                * Custom Code End Section
+                */
                
             }
         }

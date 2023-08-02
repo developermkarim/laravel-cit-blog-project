@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 { 
+
+    /* 
+    * This adminController custom developed for admin logout ,change Password ,Dashboard, profile and login page
+    */
     public function AdminDashboard(){
         return view('admin.index');
     } // End Method 

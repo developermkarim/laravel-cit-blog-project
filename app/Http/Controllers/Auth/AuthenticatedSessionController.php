@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+
     /**
      * Display the login view.
      *
@@ -33,6 +34,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+         /* 
+    * This  is created by developer.Custom code for breeze built in controller for role manageMent
+     */
+        /* 
+        *This is Custom Code Start for redirect to various Roles 
+        */
+
         $notification = array(
             'message' => 'Login Successfully',
             'alert-type' => 'info'
@@ -47,6 +55,8 @@ class AuthenticatedSessionController extends Controller
         } 
         return redirect()->intended($url)->with($notification);
     }
+
+     /* This is Custom Code End for redirect to various Roles */
  
     /**
      * Destroy an authenticated session.

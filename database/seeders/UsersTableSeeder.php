@@ -5,13 +5,13 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
-    /**
+    /*
      * Run the database seeds.
-     *
+     * it is custom seeder class file for User Table
      * @return void
      */
     public function run()

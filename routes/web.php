@@ -27,9 +27,11 @@ require __DIR__.'/auth.php';
 
 
 
-
+/* 
+* Route Middle Ware Group
+* Custom Logout page in admin dashboard.
+ */
 Route::middleware(['auth','role:admin'])->group(function() {
-
 
 Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
@@ -45,6 +47,10 @@ Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassw
 
 }); // End Admin Middleware 
 
+/* 
+* RedirectIfAuthenticated is added with route for being stable in dashboard afer login.actually it fixes bug that creates issue while navigate to login page after logged in.
+* Custom Login Page Here for admin.
+*/
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class)->name('admin.login');
 
