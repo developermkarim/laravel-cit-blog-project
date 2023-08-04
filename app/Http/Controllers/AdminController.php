@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 { 
@@ -110,6 +112,118 @@ class AdminController extends Controller
         return back()->with('status', "Password Change Successfully");
 
     } // End Method 
+
+    public function allAdmin()
+    {
+        $admins = User::where(['role'=>'admin'])->latest()->get();
+        // dd($admins);
+
+        return view('backend.admin.admin_all',compact('admins'));
+    }
+
+    public function addAdmin()
+    {
+        $adminRoles = User::select('role')->groupBy('role')->get();
+        // dd($adminRoles);
+        return view('backend.admin.admin_add',compact('adminRoles'));
+    }
+
+    public function storeAdmin(Request $request)
+    {
+          $admin = new User();
+       
+            $mainImage = $request->image;
+            //  dd($mainImage);
+           /*  $optimizeImage = $request->username . '-' . uniqid() . '.' . 'png';
+            Image::make($mainImage)->resize(450,null,function($contraint){$contraint->aspectRatio();})->save('upload/admin_images/' . $optimizeImage);
+            
+        $admin->photo = $optimizeImage; */
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->username = $request->username;
+        $admin->phone = $request->phone;
+        $admin->password = Hash::make($request->password); 
+        $admin->role = $request->roles;
+       
+         $admin->status = $request->roles == 'admin' ? 'active' : 'inactive';
+        
+        $admin->remember_token = Str::random(10);
+
+        //  dd($admin);
+        if($admin->save()){
+            $notification = [
+                'message'=> "New $request->roles is successfully regsitered",
+                'alert-type'=>'info' 
+            ];
+            return redirect('all/admin')->with($notification);
+        }
+    }
+
+    public function editAdmin($id)
+    {
+        $admin = User::findOrFail($id);
+        // dd($admin->role);
+        $roles = User::select('role')->groupBy('role')->get();
+        // dd($roles);
+        return view('backend.admin.admin_edit',compact('admin','roles'));
+    }
+
+    public function updateAdmin(Request $request)
+    {
+        $admin = User::findOrFail($request->id);
+        
+
+       
+            $mainImage = $request->file('image');
+           /*  $optimizeImage = $request->username . '-' . rand(1,55) . '.' . $mainImage->getClientOriginalExtension(); */
+         /*    Image::make($mainImage)->resize(450,function($contraint){$contraint->aspectRatio();})->save('upload/admin_image/' . $optimizeImage); */
+     
+            //  dd($mainImage);
+
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->username = $request->username;
+        $admin->phone = $request->phone;
+       /*  $admin->password = Hash::make($request->password);  */
+        $admin->role = $request->roles;
+       
+         $admin->status = $request->roles == 'admin' ? 'active' : 'inactive';
+        
+        $admin->remember_token = Str::random(10);
+
+        // dd($admin);
+        if($admin->save()){
+            $notification = [
+                'message'=> " $request->roles's data is successfully Updated",
+                'alert-type'=>'info' 
+            ];
+            return redirect('all/admin')->with($notification);
+        }
+    }
+
+    public function deleteAdmin($id)
+    {
+        $admin = User::findOrFail($id);
+        if($admin->delete()){
+
+        }
+    }
+
+    public function activeInactive($status,$id)
+    {
+        if($status == 'active'){
+           $action = User::where('id',$id)->update(['status'=>'inactive']);
+        }elseif($status == 'inactive'){
+            $action = User::where('id',$id)->update(['status'=>'active']);
+        }
+        if($action){
+            $notification = [
+                'message'=>'Status Changed Successfully',
+                'alert-type'=>'info',
+            ];
+            return redirect('all/admin')->with($notification);
+        }
+    }
 
 }
  

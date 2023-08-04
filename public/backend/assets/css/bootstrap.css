@@ -13432,10 +13432,12 @@ body[data-theme=dark] .list-group {
   --ct-list-group-action-color: #8c98a5;
   --ct-list-group-action-active-color: var(--ct-body-color);
   --ct-list-group-action-active-bg: #36404a;
-}ress-box-shadow: var(--ct-box-shadow-inset);
+
+ress-box-shadow: var(--ct-box-shadow-inset);
   --ct-progress-bar-color: #fff;
   --ct-progress-bar-bg: #6658dd;
 }
+
 body[data-theme=dark] .list-group {
   --ct-list-group-color: ;
   --ct-list-group-bg: #36404a;

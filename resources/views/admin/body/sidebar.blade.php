@@ -20,16 +20,111 @@
         </a>
     </li>
 
-                            <li class="menu-title mt-2">Menu</li>
 
-                             
-                            <li>
-                                <a href="#sidebarEcommerce" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
-                                    <span> Ecommerce </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarEcommerce">
+
+    <li>
+        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+            <i class="mdi mdi-cart-outline"></i>
+            <span> Category </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarEcommerce">
+            <ul class="nav-second-level">
+              
+                <li>
+                    <a href="{{ route('all.category') }}">All Category</a>
+                </li>
+               
+               
+                <li>
+                    <a href="{{ route('add.category') }}">Add Category</a>
+                </li>
+               
+                
+            </ul>
+        </div>
+    </li>
+
+
+    {{-- Sub category List Nav Here  --}}
+
+    <li>
+        <a href="#sidebarEcommerce1" data-bs-toggle="collapse">
+            <i class="mdi mdi-cart-outline"></i>
+            <span> SubCategory </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarEcommerce1">
+            <ul class="nav-second-level">
+                
+                <li>
+              <a href="{{ route('all.subcategory') }}">All SubCategory</a>
+                </li>
+
+                
+                <li>
+             <a href="{{ route('add.subcategory') }}">Add SubCategory</a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </li>
+
+
+    <li>
+        <a href="#sidebarAuth" data-bs-toggle="collapse">
+            <i class="mdi mdi-account-circle-outline"></i>
+            <span> Setting Admin User  </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarAuth">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('all.admin') }}">All Admin</a>
+                </li>
+
+                 <li>
+                    <a href="auth-login.html">Add Admin </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </li>
+    
+    {{-- News Post Nav Here --}}
+
+    <li>
+        <a href="#sidebarAuth" data-bs-toggle="collapse">
+            <i class="mdi mdi-account-circle-outline"></i>
+            <span> News Posts  </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarAuth">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('all.news.post') }}">All News</a>
+                </li>
+
+                 <li>
+                    <a href="{{ route('add.news.post') }}">Add News </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </li>
+
+
+     <li class="menu-title mt-2">Menu</li>
+  <li>
+               <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                   <i class="mdi mdi-cart-outline"></i>
+                         <span> Ecommerce </span>
+               <span class="menu-arrow"></span>
+               </a>
+                    <div class="collapse" id="sidebarEcommerce">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="ecommerce-dashboard.html">Dashboard</a>
