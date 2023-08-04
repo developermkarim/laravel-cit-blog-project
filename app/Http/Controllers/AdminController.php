@@ -132,12 +132,17 @@ class AdminController extends Controller
     {
           $admin = new User();
        
-            $mainImage = $request->image;
-            //  dd($mainImage);
-           /*  $optimizeImage = $request->username . '-' . uniqid() . '.' . 'png';
-            Image::make($mainImage)->resize(450,null,function($contraint){$contraint->aspectRatio();})->save('upload/admin_images/' . $optimizeImage);
-            
-        $admin->photo = $optimizeImage; */
+          if($request->hasFile('photo')){
+            $mainImage = $request->file('photo');
+            // dd($mainImage);
+            $optimizeImage = $request->username . '-' . rand(10,999) . '.' . $request->file('photo')->getClientOriginalExtension(); 
+            Image::make($mainImage)->resize(450,function($contraint){$contraint->aspectRatio();})->save('upload/admin_images/' . $optimizeImage); 
+            $save_url = 'upload/admin_images/'. $optimizeImage;
+           }else{
+            $save_url = 'upload/no_image.jpg';
+           }
+
+        $admin->photo = $save_url;
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->username = $request->username;
@@ -173,25 +178,26 @@ class AdminController extends Controller
         $admin = User::findOrFail($request->id);
         
 
-       
-            $mainImage = $request->file('image');
-           /*  $optimizeImage = $request->username . '-' . rand(1,55) . '.' . $mainImage->getClientOriginalExtension(); */
-         /*    Image::make($mainImage)->resize(450,function($contraint){$contraint->aspectRatio();})->save('upload/admin_image/' . $optimizeImage); */
-     
-            //  dd($mainImage);
+       if($request->hasFile('photo')){
+        $mainImage = $request->file('photo');
+        $optimizeImage = $request->username . '-' . rand(55,999) . '.' . $request->file('photo')->getClientOriginalExtension(); 
+        Image::make($mainImage)->resize(450,function($contraint){$contraint->aspectRatio();})->save('upload/admin_images/' . $optimizeImage); 
+        $save_url = 'upload/admin_images/' . $optimizeImage;
+       }else{
+        $save_url = $admin->image;
+       }
 
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->username = $request->username;
         $admin->phone = $request->phone;
-       /*  $admin->password = Hash::make($request->password);  */
+        $admin->photo =  $save_url;
         $admin->role = $request->roles;
        
          $admin->status = $request->roles == 'admin' ? 'active' : 'inactive';
         
         $admin->remember_token = Str::random(10);
 
-        // dd($admin);
         if($admin->save()){
             $notification = [
                 'message'=> " $request->roles's data is successfully Updated",
@@ -205,7 +211,8 @@ class AdminController extends Controller
     {
         $admin = User::findOrFail($id);
         if($admin->delete()){
-
+            
+            return redirect()->back()->with(['message'=>'an admin was deleted successfully','alert-type'=>'success']);
         }
     }
 
@@ -225,5 +232,23 @@ class AdminController extends Controller
         }
     }
 
-}
+   /*  public function deactivate($id)
+    {
+        $data = User::findOrFail($id);
+       $data->status = 'inactive';
+       return response()->json(['success'=>'User Status changed deactivated','alert-type'=>'success','status'=>$data->status]);
+
+    }
+    public function activate($id)
+    {
+        $data = User::findOrFail($id);
+       $data->status = 'active';
+       $data->save();
+        return response()->json(['success'=>'User Status changed activated','alert-type'=>'success','status'=>$data->status]);
+       } */
+
+
+    }
+
+
  

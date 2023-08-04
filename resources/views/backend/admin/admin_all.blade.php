@@ -45,17 +45,17 @@
             	@foreach($admins as $key=> $item)
                 <tr>
                     <td>{{ $key+1 }}</td>
-                    <td><img src="{{ (!empty($item->photo)) ? url('upload/admin_images/'.$item->photo): url('upload/no_image.jpg') }} " style="width: :50px; height:50px;" ></td>
+                    <td><img src="{{ (!empty($item->photo)) ? url($item->photo): url('upload/no_image.jpg') }} " style="width:50px; height:50px;" ></td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->phone }}</td>
                     <td>
       @if($item->status == 'active')
-      <span class="badge badge-soft-success">active</span>
+      <span class="badge badge-pill bg-success">Active</span>
       
 
                         @else
-                        <span class="badge badge-soft-danger">Blocked</span>
+    <span class="badge badge-soft-danger">Blocked</span>
                         @endif
 
 
@@ -69,10 +69,18 @@
       {{-- Status Change action Here --}}
 
       @if ($item->status == 'active')
-      <a href="{{ url('admin/active/' . $item->id) }}" class="" title="Inactive"> {{-- <i class="fas fa-lock text-danger"></i> --}} inactive</a>
+      <a href="{{ url('admin/active/' . $item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light" title="Inactive"><i class="fas fa-thumbs-up"></i> </a>
+
+      <a href="" style="visibility: hidden" class="" title="Inactive"> {{-- <i class="fas fa-lock text-danger"></i> --}} inactive</a>
+
+
       @elseif($item->status == 'inactive')
- <a href="{{ url('admin/inactive/' . $item->id) }}" class="" title="Active"> {{-- <i class="fas fa-lock-open"></i> --}} active</a>
+      <a href="{{ url('admin/inactive/' . $item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" title="Active"><i class="fas fa-thumbs-down"></i> </a>
+ 
       @endif
+
+    
+
             </td> 
             </tr>
                 @endforeach

@@ -85,6 +85,10 @@ Route::middleware(['auth','role:admin'])->group(function(){
         Route::get('/delete/admin/{id}','deleteAdmin')->name('delete.admin');
 
         Route::get('admin/{status}/{id}','activeInactive')->name('status.admin');
+
+        Route::post('admin/data/activate/{id}', 'activate')->name('admin.data.activate');
+        Route::post('admin/data/deactivate/{id}', 'deactivate')->name('admin.data.deactivate');
+        
     });
     /* admin route group end here */
 
