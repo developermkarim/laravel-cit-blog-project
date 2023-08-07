@@ -3,6 +3,12 @@
 
  <div class="content">
 
+    @php
+        $activeNews = App\Models\NewsPost::where(['status'=>1])->count();
+        $inactiveNews = App\Models\NewsPost::where(['status'=>0])->count();
+        $breakingNews = App\Models\NewsPost::where(['breaking_news'=>1])->count();
+        
+    @endphp
                     <!-- Start Content-->
                     <div class="container-fluid">
                         
@@ -15,11 +21,100 @@
                     <a href="{{ route('add.news.post') }}" class="btn btn-blue waves-effect waves-light">Add News Post</a>
                 </ol>
             </div>
-     <h4 class="page-title">Add News Post <span class="btn btn-danger"> {{ count($allnews) }} </span> </h4>
+   
                                 </div>
                             </div>
                         </div>     
                         <!-- end page title --> 
+                        <br>
+
+                        {{-- Count of active inactive and Breaking News Start --}}
+
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-primary border-primary border shadow">
+                                                    <i class="fe-heart font-22 avatar-title text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1"> <span data-plugin="counterup">{{count($allnews)  }}</span></h3>
+                                                    <p class="text-muted mb-1 text-truncate">All News Post</p>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end row-->
+                                    </div>
+                                </div> <!-- end widget-rounded-circle-->
+                            </div> <!-- end col-->
+                        
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-success border-success border shadow">
+                                                    <i class="fe-thumbs-up font-22 avatar-title text-white"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $activeNews }}</span></h3>
+                                                    <p class="text-muted mb-1 text-truncate">Active News</p>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end row-->
+                                    </div>
+                                </div> <!-- end widget-rounded-circle-->
+                            </div> <!-- end col-->
+                        
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-info border-info border shadow">
+                                                    <i class="fe-thumbs-down font-22 avatar-title text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $inactiveNews }}</span> </h3>
+                                                    <p class="text-muted mb-1 text-truncate">InActive News</p>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end row-->
+                                    </div>
+                                </div> <!-- end widget-rounded-circle-->
+                            </div> <!-- end col-->
+                        
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-warning border-warning border shadow">
+                                                    <i class="fe-eye font-22 avatar-title text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $breakingNews }}</span> </h3>
+                                                    <p class="text-muted mb-1 text-truncate">Breaking News</p>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end row-->
+                                    </div>
+                                </div> <!-- end widget-rounded-circle-->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row-->
+
+                        {{-- Count of active inactive and Breaking News End --}}
 
                         <div class="row">
                             <div class="col-12">
@@ -47,7 +142,7 @@
                 <tr>
                     <td>{{ $key+1 }}</td>
                     <td><img src="{{ asset($item->image) }} " style="width: :50px; height:50px;" ></td>
-                    <td>{{ $item->news_title }}</td>
+                    <td>{{ Str::limit($item->news_title,25, '...') }}</td>
                     <td>{{ $item->category_id   }}</td>
                      <td>{{ $item->user_id }}</td>
                     <td></td>

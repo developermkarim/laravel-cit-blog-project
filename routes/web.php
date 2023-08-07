@@ -22,8 +22,17 @@ use App\Http\Middleware\RedirectIfAuthenticated;
     return view('welcome');
 }); */
 
+Route::controller(IndexController::class)->group(function(){
 
-Route::get('/', [IndexController::class, 'Index']);
+Route::get('/', 'Index');
+
+Route::get('/news/post/details/{id}/{slug}', 'newsDetails');
+
+Route::get('/news/category/{id}/{slug}','cateWiseNews')->name('news.post.category');
+Route::get('/news/subcategory/{id}/{slug}','subcateWiseNews')->name('news.post.subcategory');
+
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -131,6 +140,8 @@ Route::controller(NewsPostController::class)->group(function(){
 
     Route::get('/news/post/active/{id}','activeNewsPost')->name('active.news.post');
     Route::get('/news/post/inactive/{id}','inactiveNewsPost')->name('inactive.news.post');
+
+    
 
 });
 
