@@ -73,12 +73,12 @@
 
 
     <li>
-        <a href="#sidebarAuth" data-bs-toggle="collapse">
+        <a href="#adminsidebarAuth" data-bs-toggle="collapse">
             <i class="mdi mdi-account-circle-outline"></i>
             <span> Setting Admin User  </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarAuth">
+        <div class="collapse" id="adminsidebarAuth">
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('all.admin') }}">All Admin</a>
@@ -96,12 +96,12 @@
     {{-- News Post Nav Here --}}
 
     <li>
-        <a href="#sidebarAuth" data-bs-toggle="collapse">
+        <a href="#newssidebarAuth" data-bs-toggle="collapse">
             <i class="mdi mdi-account-circle-outline"></i>
             <span> News Posts  </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarAuth">
+        <div class="collapse" id="newssidebarAuth">
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('all.news.post') }}">All News</a>
@@ -110,6 +110,29 @@
                  <li>
                     <a href="{{ route('add.news.post') }}">Add News </a>
                 </li>
+                
+                
+            </ul>
+        </div>
+    </li>
+
+    {{-- Banner Here --}}
+
+    <li>
+        <a href="#bannersidebarAuth" data-bs-toggle="collapse">
+            <i class="mdi mdi-account-circle-outline"></i>
+            <span> Banners  </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="bannersidebarAuth">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('all.banners') }}">All Banners</a>
+                </li>
+
+                {{--  <li>
+                    <a href="{{ url('update/banners') }}">Update Banners </a>
+                </li> --}}
                 
                 
             </ul>

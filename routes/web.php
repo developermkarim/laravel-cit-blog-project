@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,11 @@ Route::get('/news/post/details/{id}/{slug}', 'newsDetails');
 
 Route::get('/news/category/{id}/{slug}','cateWiseNews')->name('news.post.category');
 Route::get('/news/subcategory/{id}/{slug}','subcateWiseNews')->name('news.post.subcategory');
+
+/* Change Language Route Here */
+
+Route::get('/lang/change','changeLanguage')->name('change.language');
+
 
 });
 
@@ -142,6 +149,24 @@ Route::controller(NewsPostController::class)->group(function(){
     Route::get('/news/post/inactive/{id}','inactiveNewsPost')->name('inactive.news.post');
 
     
+
+});
+
+/* Banner Routes of admin Panel Here */
+
+/*    Route::controller(BannerController::class)->group(function(){
+
+    Route::get('/all/banners/','AllBanners')->name('all.banners');
+
+    Route::post('/update/banners/', 'UpdateBanners')->name('update.banners');
+});
+ */
+
+Route::controller(BannerController::class)->group(function(){
+
+    Route::get('/all/banners','AllBanners')->name('all.banners');
+    Route::post('/update/banners','UpdateBanners')->name('update.banners');
+   
 
 });
 

@@ -7,11 +7,12 @@ use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
 
 class indexController extends Controller
 {
     public function Index(){
+        
         return view('frontend.index');
     } 
     // End Method 
@@ -60,5 +61,14 @@ class indexController extends Controller
         $popular_posts = NewsPost::where('view_count','DESC')->limit(8)->get();
 
         return view('backend.news.subcategory_news',compact('news','bread_subcategory','latest_posts','popular_posts','two_news'));
+    }
+
+    public function changeLanguage(Request $request)
+    {
+        // dd($request);
+        App::setLocale($request->lang);
+        session()->put('locale',$request->lang);
+
+        return redirect()->back()->with(['message'=>'You have changed language successfully','alert-type'=>'success']);
     }
 }
