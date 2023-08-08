@@ -159,8 +159,10 @@ Route::controller(PhotoGalleryController::class)->group(function(){
 
 });
 
+
 /* Live tv , Gallery and Video Controller routes Here */
 // Video Gallery all Route
+
 Route::controller(VideoGalleryController::class)->group(function(){
 
     Route::get('/all/video/gallery','AllVideoGallery')->name('all.video.gallery'); 
@@ -174,11 +176,11 @@ Route::controller(VideoGalleryController::class)->group(function(){
      Route::post('/update/video/gallery','UpdateVideoGallery')->name('update.video.gallery');
 
      Route::get('/delete/video/gallery/{id}','DeleteVideoGallery')->name('delete.video.gallery');
-
      Route::get('/update/live/tv','UpdateLiveTv')->name('update.live.tv');
      Route::post('/update/live','UpdateLiveData')->name('update.live');
 
 });
+
 
 Route::controller(BannerController::class)->group(function(){
 

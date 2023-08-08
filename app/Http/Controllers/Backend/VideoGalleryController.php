@@ -132,8 +132,6 @@ class VideoGalleryController extends Controller
 
 
 /////////////////// Live TV Method ////////////////
-
-
     public function UpdateLiveTv(){
         $live = LiveTv::findOrFail(1);
 
