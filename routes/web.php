@@ -4,10 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\JustBannerController;
 use App\Http\Controllers\Backend\NewsPostController;
+use App\Http\Controllers\Backend\PhotoGalleryController;
+use App\Http\Controllers\Backend\VideoGalleryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Middleware\RedirectIfAuthenticated;
-use App\Http\Middleware\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,29 +26,12 @@ use App\Http\Middleware\Role;
     return view('welcome');
 }); */
 
-Route::controller(IndexController::class)->group(function(){
-
-Route::get('/', 'Index');
-
-Route::get('/news/post/details/{id}/{slug}', 'newsDetails');
-
-Route::get('/news/category/{id}/{slug}','cateWiseNews')->name('news.post.category');
-Route::get('/news/subcategory/{id}/{slug}','subcateWiseNews')->name('news.post.subcategory');
-
-/* Change Language Route Here */
-
-Route::get('/lang/change','changeLanguage')->name('change.language');
-
-
-});
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-
 
 
 /* 
@@ -107,8 +92,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
         
     });
     /* admin route group end here */
-
-    Route::controller(CategoryController::class)->group(function(){
+Route::controller(CategoryController::class)->group(function(){
     /* Category Routes Here */
 
     Route::get('/all/category','AllCategory')->name('all.category');
@@ -148,26 +132,78 @@ Route::controller(NewsPostController::class)->group(function(){
     Route::get('/news/post/active/{id}','activeNewsPost')->name('active.news.post');
     Route::get('/news/post/inactive/{id}','inactiveNewsPost')->name('inactive.news.post');
 
-    
-
 });
 
 /* Banner Routes of admin Panel Here */
-
-/*    Route::controller(BannerController::class)->group(function(){
-
-    Route::get('/all/banners/','AllBanners')->name('all.banners');
-
-    Route::post('/update/banners/', 'UpdateBanners')->name('update.banners');
-});
- */
-
 Route::controller(BannerController::class)->group(function(){
 
-    Route::get('/all/banners','AllBanners')->name('all.banners');
-    Route::post('/update/banners','UpdateBanners')->name('update.banners');
+/*     Route::get('/all/banners','AllBanners')->name('all.banners');
+    Route::post('/update/banners','UpdateBanners')->name('update.banners'); */
+/*     Route::get('/all/banners/','AllBanners')->name('all.banners');
+    Route::get('/update/banners/','UpdateBanners')->name('update.banners'); */
    
+});
+
+// PhotoGallery all Route
+Route::controller(PhotoGalleryController::class)->group(function(){
+
+    Route::get('/all/photo/gallery','AllPhotoGallery')->name('all.photo.gallery');
+    Route::get('/add/photo/gallery','AddPhotoGallery')->name('add.photo.gallery');
+    Route::post('/store/photo/gallery','StorePhotoGallery')->name('store.photo.gallery');
+
+    Route::get('/edit/photo/gallery/{id}','EditPhotoGallery')->name('edit.photo.gallery');
+
+    Route::post('/update/photo/gallery','UpdatePhotoGallery')->name('update.photo.gallery');
+
+    Route::get('/delete/photo/gallery/{id}','DeletePhotoGallery')->name('delete.photo.gallery');
 
 });
 
+/* Live tv , Gallery and Video Controller routes Here */
+// Video Gallery all Route
+Route::controller(VideoGalleryController::class)->group(function(){
+
+    Route::get('/all/video/gallery','AllVideoGallery')->name('all.video.gallery'); 
+
+    Route::get('/add/video/gallery','AddVideoGallery')->name('add.video.gallery');
+
+    Route::post('/store/video/gallery','StoreVideoGallery')->name('store.video.gallery');
+
+     Route::get('/edit/video/gallery/{id}','EditVideoGallery')->name('edit.video.gallery');
+
+     Route::post('/update/video/gallery','UpdateVideoGallery')->name('update.video.gallery');
+
+     Route::get('/delete/video/gallery/{id}','DeleteVideoGallery')->name('delete.video.gallery');
+
+     Route::get('/update/live/tv','UpdateLiveTv')->name('update.live.tv');
+     Route::post('/update/live','UpdateLiveData')->name('update.live');
+
 });
+
+Route::controller(JustBannerController::class)->group(function(){
+
+    Route::get('/all/banners','allBanners')->name('all.banners');
+
+    Route::post('/update/banners','updateBanners')->name('update.banners');
+});
+
+}); // This end is of admin role middleware
+
+
+/* Access routes for all Start */
+Route::controller(IndexController::class)->group(function(){
+
+    Route::get('/', 'Index');
+    
+    Route::get('/news/post/details/{id}/{slug}', 'newsDetails');
+    
+    Route::get('/news/category/{id}/{slug}','cateWiseNews')->name('news.post.category');
+    Route::get('/news/subcategory/{id}/{slug}','subcateWiseNews')->name('news.post.subcategory');
+    
+    /* Change Language Route Here */
+    
+    Route::get('/lang/change','changeLanguage')->name('change.language');
+    
+    
+    });
+/* Access routes for all End */
