@@ -180,7 +180,7 @@ Route::controller(VideoGalleryController::class)->group(function(){
 
 });
 
-Route::controller(JustBannerController::class)->group(function(){
+Route::controller(BannerController::class)->group(function(){
 
     Route::get('/all/banners','allBanners')->name('all.banners');
 

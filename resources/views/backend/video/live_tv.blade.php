@@ -42,7 +42,7 @@
   
              <div class="form-group col-md-6 mb-3">
                 <label for="inputEmail4" class="form-label">Live Image </label>
-                <input type="file" name="live_image" class="form-control"id="image"  >
+                <input type="file" name="live_image" class="form-control"id="image">
             </div>
 
              <div class="form-group col-md-6 mb-3">
