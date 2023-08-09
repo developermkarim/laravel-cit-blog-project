@@ -14,7 +14,7 @@
  
 
  <figure class="authorPage-image">
-<img alt="" src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo): url('upload/no_image.jpg') }}" class="avatar avatar-96 photo" height="96" width="96" loading="lazy"> </figure>
+<img alt="" src="{{ (!empty($userData->photo)) ? asset($userData->photo): url('upload/no_image.jpg') }}" class="avatar avatar-96 photo" height="96" width="96" loading="lazy"> </figure>
 <h1 class="authorPage-name">
 <a href=" "> {{ $userData->name }} </a>
 </h1>
@@ -125,7 +125,7 @@ Photo *
 </div>
 <div class="contact-form">
 <span class="wpcf7-form-control-wrap sub_title"> 
-	<img id="showImage" src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo): url('upload/no_image.jpg') }} " class="rounded-circle avatar-lg img-thumbnail" alt="profile-image" style="width:100px; height:100px;"></span>
+	<img id="showImage" src="{{ (!empty($userData->photo)) ? url($userData->photo): url('upload/no_image.jpg') }} " class="rounded-circle avatar-lg img-thumbnail" alt="profile-image" style="width:100px; height:100px;"></span>
 </div>
 </div>
 

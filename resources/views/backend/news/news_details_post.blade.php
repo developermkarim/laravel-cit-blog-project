@@ -1,6 +1,8 @@
 @extends('frontend.home_dashboard')
 @section('home')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-8">
@@ -101,36 +103,65 @@
                     </script>
                 </a>
             </div>
+@php
+    $reviews = App\Models\NewsComment::where(['status'=>1])->where(['news_id'=>$news->id])->limit(5)->get();
+@endphp
 
+      @forelse ($reviews as $review)
+          
+     
             <div class="author2">
                 <div class="author-content2">
                     <h6 class="author-caption2">
                         <span> COMMENTS </span>
                     </h6>
                     <div class="author-image2">
-                        <img alt="" src="assets/images/lazy.jpg
-" class="avatar avatar-96 photo" height="96" width="96" loading="lazy"> </div>
-                    <div class="authorContent">
+                        <img alt="" src="{{ !empty($review->user->photo) ? asset($review->user->photo) : url('upload/no_image.jpg') }}" class="avatar avatar-96 photo" height="96" width="96" loading="lazy"> </div>
+                    <div class="authorContent" id="commentList">
                         <h1 class="author-name2">
-                            <a href=" "> Jack MA </a>
+                            <a href=" "> {{ $review->user->name }} </a>
                         </h1>
-                        <div class="author-details">It will take the Queen's coffin on a final journey through London
-                            and on to Windsor Castle for a second service</div>
+                        <div class="author-details">{{ $review->comment }}</div>
                     </div>
 
                 </div>
             </div>
 
+            @empty
+                <div class="authorContent" id="commentList">
+                <h1 class="author-name2">
+                  {{--   <a href=" "> </a> --}}
+                </h1>
+                <div class="author-details">No Reviews is found</div>
+            </div>
+            @endforelse
 
             <hr>
 
-            <form action=" " method="post" class="wpcf7-form init" enctype="multipart/form-data" novalidate="novalidate"
-                data-status="init">
+           {{--  <form id="comment-form" action="{{ route('store.comment') }}" method="post" class="wpcf7-form init" enctype="multipart/form-data" novalidate="novalidate"
+                data-status="init"> --}}
+                {{-- <form id="comment-form"> --}}
+
+                    
+                    <form id="comment-form" action="{{ route('store.review') }}" >
+                @csrf
+
+                @if (session('status'))
+                        <div class="alert alert-primary" role="alert">
+                            <strong>{{ session('status') }}</strong>
+                        </div>
+                    @elseif (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ session('error') }}</strong>
+                    </div>
+                    @endif
+
+                <input type="hidden" id="news_id" value="{{ $news->id }}" name="news_id">
                 <div style="display: none;">
 
                 </div>
                 <div class="main_section">
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="contact-title ">
                                 Subject *
@@ -141,18 +172,20 @@
                                         placeholder="News Sub Title"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
+                 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="contact-title">
                                 Comments *
                             </div>
                             <div class="contact-form">
-                                <span class="wpcf7-form-control-wrap news"><textarea name="news" cols="20" rows="5"
-                                        class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required"
+                              <span class="wpcf7-form-control-wrap news">
+                    <textarea id="content" @disabled(auth()->guest()) name="content" cols="20" rows="5" style="{{ auth()->guest() ? 'cursor:not-allowed':'cursor:text' }}" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required"
                                         aria-required="true" aria-invalid="false"
-                                        placeholder="News Details...."></textarea></span>
+                                        placeholder="News Details...."> </textarea>
+                                    </span>
                             </div>
                         </div>
                     </div>
@@ -162,11 +195,24 @@
                 </div>
 
                 <div class="row">
+
                     <div class="col-md-12">
                         <div class="contact-btn">
-                            <input type="submit" value="Submit Comments"
-                                class="wpcf7-form-control has-spinner wpcf7-submit"><span class="wpcf7-spinner"></span>
+                            <input @disabled(auth()->guest()) type="submit" style="{{ auth()->guest() ? 'cursor:not-allowed':'cursor:pointer' }}" value="Submit Comments"
+                                class="wpcf7-form-control has-spinner wpcf7-submit">
+                                
+                                <span class="wpcf7-spinner"></span>
+
+                                @if (auth()->guest())
+                                <p><b> For Add Product Review. You Need To Login First <a href="{{ route('login') }}"> Login Page</a> </b> </p>
+                                @endif 
                         </div>
+                        {{-- <div class="contact-btn"> --}}
+                           
+                       
+                                
+                            {{--     <span class="wpcf7-spinner"></span>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -272,6 +318,64 @@
     </div>
 </div>
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Fetch and display comments
+            function fetchComments() {
+                $.ajax({
+                    url: '/comments',
+                    type: 'GET',
+                    success: function (data) {
+                        var commentsHtml = '';
+                        data.forEach(function (comment) {
+                            commentsHtml += '<li>' + comment.content +
+                                            ' <button class="deleteBtn" data-id="' + comment.id + '">Delete</button></li>';
+                        });
+                        $('#commentList').html(commentsHtml);
+                    }
+                });
+            }
+
+            fetchComments(); // Initial fetch
+
+            // Add a new comment
+            $('#comment-form').submit(function (e) {
+                e.preventDefault();
+                var content = $('#content').val();
+                var news_id  = $('#news_id').val();
+                var 
+
+                $.ajax({
+                    url: '/comments',
+                    type: 'POST',
+                    data: { content: content,news_id:news_id },
+                    success: function () {
+                        $('#content').val('');
+                        fetchComments(); // Fetch and update the list
+                    }
+                });
+            });
+
+            // Delete a comment
+            $(document).on('click', '.deleteBtn', function () {
+                var id = $(this).data('id');
+                
+                $.ajax({
+                    url: '/comments/' + id,
+                    type: 'DELETE',
+                    success: function () {
+                        fetchComments(); // Fetch and update the list
+                    }
+                });
+            });
+        });
+
+</scrip>
 
 
 

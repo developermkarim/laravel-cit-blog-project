@@ -9,6 +9,9 @@ use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\Backend\PhotoGalleryController;
 use App\Http\Controllers\Backend\VideoGalleryController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\NewsCommentController as CommentController;
+use App\Http\Controllers\Frontend\NewsCommentController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -27,9 +30,26 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 }); */
 
 
-Route::get('/dashboard', function () {
+/* Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+ */
+Route::get('/', [IndexController::class,'index']);
+
+Route::middleware(['auth'])->group(function() {
+
+    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
+    
+    Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
+    
+    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+    
+    Route::get('/change/password', [UserController::class, 'ChangePassword'])->name('change.password');
+    
+    Route::post('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
+    
+    }); // End User Middleware 
+    
 
 require __DIR__.'/auth.php';
 
@@ -189,13 +209,22 @@ Route::controller(BannerController::class)->group(function(){
     Route::post('/update/banners','updateBanners')->name('update.banners');
 });
 
+    // Review all Route
+    Route::controller(NewsCommentController::class)->group(function(){
+
+        Route::get('/pending/review','PendingReview')->name('review.pending');
+        Route::get('/review/approve/{id}','ReviewApprove')->name('review.approve');
+        Route::get('/approve/review','ApproveReview')->name('review.approved'); 
+        Route::get('/delete/review/{id}','DeleteReview')->name('delete.review');
+     
+    });
+
 }); // This end is of admin role middleware
 
 
 /* Access routes for all Start */
-Route::controller(IndexController::class)->group(function(){
 
-    Route::get('/', 'Index');
+Route::controller(IndexController::class)->group(function(){
     
     Route::get('/news/post/details/{id}/{slug}', 'newsDetails');
     
@@ -206,6 +235,20 @@ Route::controller(IndexController::class)->group(function(){
     
     Route::get('/lang/change','changeLanguage')->name('change.language');
     
-    
     });
+    Route::post('store/review/',[NewsCommentController::class,'storeReview'])->name('store.review');
+
+
+
+/*     Route::controller(NewsCommentController::class)->group(function(){
+
+        Route::post('/store/comment','storeComment')->name('store.comment');
+    }); */
+    // Route::resource('comments', NewsCommentController::class)->middleware('auth');
+
+/*     Route::get('/comments', 'CommentController@index'); // To fetch all comments
+Route::post('/comments', 'CommentController@store'); // To create a new comment
+Route::put('/comments/{id}', 'CommentController@update'); // To update a comment
+Route::delete('/comments/{id}', 'CommentController@destroy'); // To delete a comment
+ */
 /* Access routes for all End */

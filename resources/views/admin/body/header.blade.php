@@ -28,30 +28,24 @@
                                             <i class="fe-aperture me-1"></i>
                                             <span>How can I help you?</span>
                                         </a> 
-                                   
-            
                                     </div>  
                                 </div>
                             </form>
                         </li>
-    
-
-
-
-                     
+         
                         <li class="dropdown d-none d-lg-inline-block">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                                 <i class="fe-maximize noti-icon"></i>
                             </a>
                         </li>
     
-                     
-     
-            
+            @php
+                $reviewCount = Auth::user()->unreadNotifications->count();
+            @endphp
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <i class="fe-bell noti-icon"></i>
-                                <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+                                <span class="badge bg-danger rounded-circle noti-icon-badge">{{ $reviewCount }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-lg">
     
@@ -68,38 +62,35 @@
     
     <div class="noti-scroll" data-simplebar>
 
-        <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item active">
-            <div class="notify-icon">
-                <img src="{{ asset('backend/assets/images/users/user-1.jpg') }}" class="img-fluid rounded-circle" alt="" /> </div>
-            <p class="notify-details">Ariyan</p>
-            <p class="text-muted mb-0 user-msg">
-                <small>Hi, How are you?  </small>
-            </p>
-        </a>
+    @php
+        $user = Auth::user();
+    @endphp
      
-
+        @forelse ($user->notifications as $item)
+            
+       
         <!-- item-->
         <a href="javascript:void(0);" class="dropdown-item notify-item">
             <div class="notify-icon">
-                <img src="{{ asset('backend/assets/images/users/user-4.jpg') }}" class="img-fluid rounded-circle" alt="" /> </div>
-            <p class="notify-details">Karen Robinson</p>
+                <img src="{{ !empty($item->photo) ? asset($item->photo) : asset('upload/no_image.png') }}" class="img-fluid rounded-circle" alt="" /> </div>
+            <p class="notify-details">{{ Str::words($item->comment, 8, '...') }}</p>
             <p class="text-muted mb-0 user-msg">
-                <small>Wow ! this admin looks good and awesome design</small>
+                <small>{{ Carbon\Carbon::parse($item->created_at->diffForHumans()) }}</small>
             </p>
         </a>
       
-    
-        <!-- item-->
+        @empty
         <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <div class="notify-icon bg-secondary">
-                <i class="mdi mdi-heart"></i>
-            </div>
-            <p class="notify-details">Carlos Crouch liked
-                <b>Admin</b>
-                <small class="text-muted">13 days ago</small>
+            <div class="notify-icon">
+                <img src="{{ asset('upload/no_iamge.png') }}" class="img-fluid rounded-circle" alt="" /> </div>
+            <p class="notify-details"> {{-- Karen Robinson --}} </p>
+            <p class="text-muted mb-0 user-msg">
+                <small>{{ 'No Notification is available' }}</small>
             </p>
         </a>
+        @endforelse
+    
+     
     </div>
     
                                 <!-- All-->
@@ -112,9 +103,12 @@
                         </li>
 
 @php 
-
-        $id = Auth::user()->id;
+ /*    if (Auth::user()->role ==1) { */
+        $id = auth()->user()->id;
         $adminData = App\Models\User::find($id);
+   /*  } */
+
+
 @endphp
 
     

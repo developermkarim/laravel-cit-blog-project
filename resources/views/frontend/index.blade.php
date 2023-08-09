@@ -48,7 +48,8 @@
                                                     </a>
                                                 </h6>
                                                 <h1 class="sec-one-title">
-                                                    <a href="{{ url('news/post/details/'.$news->id) . '/' . $news->status }}">{{ $news->news_title }}</a>
+                                                    <a href="{{ url('news/post/details/'.$news->id) . '/' . $news->status }}">{{
+                                                        GoogleTranslate::trans($news->news_title,app()->getLocale()) }}</a>
                                                 </h1>
                                             </div>
                                         </div>
@@ -296,7 +297,7 @@
                                 <div class="nav-link" id="categori-tab2" data-bs-toggle="pill"
                                     data-bs-target="#category{{ $item->id }}" role="tab" aria-controls="Info-tabs2"
                                     aria-selected="false">
-                                    {{ $item->category_name }}
+                                    {{ GoogleTranslate::trans($item->category_name,app()->getLocale())  }}
                                     </div>
                             </li>
 
@@ -321,7 +322,7 @@
                                     </div>
                                     <h5 class="sec-two-title">
                                         <a
-                                            href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ $item->news_title }}
+                                            href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
                                         </a>
                                     </h5>
                                 </div>
@@ -351,7 +352,7 @@
                                          </div>
                                          <h5 class="sec-two-title">
                                              <a
-                                                 href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ $item->news_title }}
+                                                 href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
                                              </a>
                                          </h5>
                                      </div>
@@ -376,7 +377,7 @@
             <div class="themesBazar_widget">
                 <div class="textwidget">
                     <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                            src="{{-- {{ asset($banner->home_three) }} --}}" alt="" width="100%" height="auto">
+                            src="{{ asset($banner->home_three) }}" alt="" width="100%" height="auto">
                     </p>
                 </div>
             </div>
@@ -385,7 +386,7 @@
             <div class="themesBazar_widget">
                 <div class="textwidget">
                     <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                            src="{{-- {{ asset($banner->home_four) }} --}}" alt="" width="100%" height="auto"></p>
+                            src="{{ asset($banner->home_four) }}" alt="" width="100%" height="auto"></p>
                 </div>
             </div>
         </div>
@@ -399,7 +400,7 @@
 
                 <h2 class="themesBazar_cat07"> <a
                         href="{{ url('news/category/' . $skip_cat_0->id . '/' . $skip_cat_0->category_slug) }}"> <i
-                            class="las la-align-justify"></i> {{ $skip_cat_0->category_name }} </a> </h2>
+                            class="las la-align-justify"></i> {{ GoogleTranslate::trans($skip_cat_0->category_name,app()->getLocale())}} </a> </h2>
 
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -412,7 +413,7 @@
                                     </div>
                                     <h4 class="secThree-title">
                                         <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">
-                                            {{ $item->news_title }} </a>
+                                            {{ GoogleTranslate::trans($item->news_title,app()->getLocale())  }} </a>
                                     </h4>
                                 </div>
                             @endif
@@ -434,7 +435,7 @@
                                             <a href=" " class="small-icon3"><i class="la la-play"></i></a>
                                             <h5 class="secOne_smallTitle">
                                                 <a
-                                                    href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ $item->news_title }}
+                                                    href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
                                                 </a>
                                             </h5>
                                         </div>
@@ -501,7 +502,7 @@
 
                 <h2 class="themesBazar_cat04"> <a
                         href="{{ url('news/category/' . $skip_cat_2->id . '/' . $skip_cat_2->category_slug) }}"> <i
-                            class="las la-align-justify"></i> {{ $skip_cat_2->category_name }} </a> </h2>
+                            class="las la-align-justify"></i> {{ GoogleTranslate::trans($skip_cat_2->category_name,app()->getLocale()) }} </a> </h2>
 
                 <div class="secFour-slider owl-carousel owl-loaded owl-drag">
 
@@ -518,7 +519,8 @@
                                                     src="{{ asset($item->image) }}"></a>
                                             <h5 class="secFour-title">
                                                 <a
-                                                    href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ $item->news_title }}</a>
+                                                    href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">
+                                                    {{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}</a>
                                             </h5>
                                         </div>
                                     </div>
@@ -568,7 +570,7 @@
 
                 <h2 class="themesBazar_cat01"> <a
                         href="{{ url('news/category/' . $skip_cat_1->id . '/' . $skip_cat_1->category_slug) }}">{{ $skip_cat_1->category_name }}</a>
-                    <span> <a href="{{ url('news/category/' . $skip_cat_1->id . '/' . $skip_cat_1->category_slug) }}"> More
+                    <span> <a href="{{ url('news/category/' . $skip_cat_1->id . '/' . $skip_cat_1->category_slug) }}">{{ GoogleTranslate::trans('More',app()->getLocale()) }} More
                             <i class="las la-arrow-circle-right"></i> </a></span> </h2>
 
                 <div class="white-bg">
@@ -579,7 +581,7 @@
                                 <a href=" "><img class="lazyload" src="{{ asset($item->image) }}"></a>
                                 <div class="secFive-title">
                                     <a
-                                        href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ $item->news_title }}</a>
+                                        href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ GoogleTranslate::trans($item->news_title,app()->getLocale())  }}</a>
                                 </div>
                             </div>
                         @endif
@@ -593,7 +595,7 @@
                                     <a href=" "><img class="lazyload" src="{{ asset($item->image) }}"></a>
                                     <h5 class="secFive_title2">
                                         <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">
-                                            {{ $item->news_title }}</a>
+                                            {{  GoogleTranslate::trans($item->news_title,app()->getLocale())  }}</a>
                                     </h5>
                                 </div>
                             </div>
@@ -605,7 +607,7 @@
             </div>
             <div class="col-lg-4 col-md-4">
 
-                <h2 class="themesBazar_cat01"> <a href=" "> INTERNATIONAL </a> <span> <a href=" ">More <i
+                <h2 class="themesBazar_cat01"> <a href=" "> {{  GoogleTranslate::trans('INTERNATIONAL',app()->getLocale())  }}  </a> <span> <a href=" ">  {{  GoogleTranslate::trans('More',app()->getLocale())  }}  <i
                                 class="las la-arrow-circle-right"></i> </a></span> </h2>
 
                 <div class="white-bg">
@@ -840,8 +842,8 @@
 <section class="section-seven">
     <div class="container">
 
-        <h2 class="themesBazar_cat01"> <a href=" "> {{ $skip_cat_4->category_name }} </a> <span> <a
-                    href="{{ url('news/category/' . $skip_cat_4->id . '/' . $skip_cat_4->category_slug) }}"> More <i
+        <h2 class="themesBazar_cat01"> <a href=" ">  {{ GoogleTranslate::trans($skip_cat_4->category_name,app()->getLocale())  }} </a> <span> <a
+                    href="{{ url('news/category/' . $skip_cat_4->id . '/' . $skip_cat_4->category_slug) }}">{{ GoogleTranslate::trans('More',app()->getLocale())  }}  <i
                         class="las la-arrow-circle-right"></i> </a></span> </h2>
 
         <div class="secSecven-color">

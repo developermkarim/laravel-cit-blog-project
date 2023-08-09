@@ -191,6 +191,28 @@
             </li>
 
 
+             <li>
+                <a href="#review" data-bs-toggle="collapse">
+                    <i class="mdi mdi-email-multiple-outline"></i>
+                    <span> User Reviews </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="review">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ route('review.pending') }}">Pending Reviews</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('review.approved') }}">Approved Reviews</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </li>
+
+
+
+
      <li class="menu-title mt-2">Menu</li>
   <li>
                <a href="#sidebarEcommerce" data-bs-toggle="collapse">

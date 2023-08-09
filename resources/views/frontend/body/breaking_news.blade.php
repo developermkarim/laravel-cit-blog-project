@@ -6,41 +6,26 @@
 <div class="col-md-12 top_scroll2">
 <div class="scroll5-left">
 <div id="scroll5-left">
-<span> Breaking News :: </span>
+<span> {{ GoogleTranslate::trans('Breaking News',app()->getLocale()) }} :: </span>
 </div>
 </div>
 <div class="scroll5-right">
 <marquee direction="left" scrollamount="5px" onmouseover="this.stop()" onmouseout="this.start()">
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20 </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20 </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20  </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20 </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20  </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20  </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20  </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20 </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20  </a>
-<a href=" ">
-<img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px" height="auto">
-Pakistan bring back Hayden for T20  </a>
+    @php
+        $breaking_news = App\Models\NewsPost::orderBy('id','DESC')->where(['status'=>1])->where(['breaking_news'=>1])->limit(8)->get();
+
+        // dd($breaking_news);
+    @endphp
+
+    @foreach ($breaking_news as $news)
+    
+<a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}">
+<img src="{{ asset($news->image) }}" alt="Logo" title="Logo" width="30px" height="auto">
+
+{{ GoogleTranslate::trans($news->news_title,app()->getLocale()) }} 
+</a>
+
+@endforeach
 </marquee>
 </div>
 <div class="scroolbar5">

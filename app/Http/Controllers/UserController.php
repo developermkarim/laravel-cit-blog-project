@@ -31,7 +31,7 @@ class UserController extends Controller
             @unlink(public_path('upload/user_images/'.$data->photo));
             $filename = date('YmdHi').$file->getClientOriginalName();
             $file->move(public_path('upload/user_images'),$filename);
-            $data['photo'] = $filename;
+            $data['photo'] = 'upload/user_images/'.$filename;
         }
 
         $data->save();

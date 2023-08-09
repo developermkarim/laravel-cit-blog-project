@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Stevebauman\Location\Facades\Location;
@@ -25,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*',function($view){
+        Schema::defaultStringLength(191);
+       /*  View::composer('*',function($view){ */
 
             // Set the timezone to Dhaka
      // date_default_timezone_set('Asia/Dhaka');
@@ -56,7 +58,6 @@ class AppServiceProvider extends ServiceProvider
             
             */
             // $view->with('formateDate',$todayDate);
-            // $view->with('cityName',$locationName);
-        });
+ 
     }
 }
