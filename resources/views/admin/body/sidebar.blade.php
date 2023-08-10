@@ -211,6 +211,26 @@
             </li>
 
 
+             <li>
+                <a href="#seo" data-bs-toggle="collapse">
+                    <i class="mdi mdi-email-multiple-outline"></i>
+                    <span> SEO Optimize </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="seo">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ route('seo.setting') }}">SEO Setting</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('update.seo.setting') }}">SEO Setting Update</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </li>
+
+
 
 
      <li class="menu-title mt-2">Menu</li>

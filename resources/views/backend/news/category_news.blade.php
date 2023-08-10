@@ -1,6 +1,8 @@
 @extends('frontend.home_dashboard')
 @section('home')
 
+@section('title', $bread_category->category_name)
+
 <div class="container">
     <div class="row">
         <div class="col-lg-12">

@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\JustBannerController;
 use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\Backend\PhotoGalleryController;
+use App\Http\Controllers\Backend\SeoSettingController;
 use App\Http\Controllers\Backend\VideoGalleryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\NewsCommentController as CommentController;
@@ -219,6 +220,14 @@ Route::controller(BannerController::class)->group(function(){
      
     });
 
+    // Review all Route
+Route::controller(SeoSettingController::class)->group(function(){
+
+    Route::get('/seo/setting','SeoSiteSetting')->name('seo.setting');
+    Route::post('/update/seo/setting','UpdateSeoSetting')->name('update.seo.setting');
+ 
+});
+
 }); // This end is of admin role middleware
 
 
@@ -235,7 +244,12 @@ Route::controller(IndexController::class)->group(function(){
     
     Route::get('/lang/change','changeLanguage')->name('change.language');
     
+    /* Reporter Wise Post Route */
+    Route::get('/reporter/news/{id}','reporterWiseNews')->name('reporter.news.post');
+
     });
+
+
     Route::post('store/review/',[NewsCommentController::class,'storeReview'])->name('store.review');
 
 

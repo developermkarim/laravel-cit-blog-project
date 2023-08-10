@@ -1,19 +1,25 @@
 <!DOCTYPE html>
- 
+
+ @php
+	 $seo = App\Models\SeoSetting::findOrFail(1);
+ @endphp
+
 <html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
-<title>Easy News | Online New Portal </title>
+<title> @yield('title') | Online New Portal </title>
  
 <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.gif') }}" type="image/x-icon">
  
 {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
   
-<meta name="keywords" content="online newspaper, bangla news, news, bangla, newsportal">
-<meta name="description" content="Popular News Paper of Bangladesh">
+<meta name="keywords" content="{{ $seo->meta_keyword }}">
+<meta name="title" content="{{ $seo->meta_title }}">
+<meta name="author" content="{{ $seo->meta_author }}">
+<meta name="description" content="{{ $seo->meta_description }}">
 
  <link rel="stylesheet" href="{{ asset('frontend/assets/css/line-awesome.min.css') }}" />
  <link rel="stylesheet" href="{{ asset('frontend/assets/css/headstyle.css') }}" />

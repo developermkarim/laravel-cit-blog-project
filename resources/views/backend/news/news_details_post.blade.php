@@ -1,6 +1,8 @@
 @extends('frontend.home_dashboard')
 @section('home')
 
+@section('title', $news->news_title)
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div class="container">
@@ -30,13 +32,13 @@
             <div class="row g-2">
                 <div class="col-lg-1 col-md-2 ">
                     <div class="reportar-image">
-                        <img
-                            src="{{ (!empty($news->user->photo)) ? url($news->user->photo): url('upload/no_image.jpg') }}">
+                        <a href="{{ route('reporter.news.post',$news->user->id) }}">   <img
+                            src="{{ (!empty($news->user->photo)) ? url($news->user->photo): url('upload/no_image.jpg') }}"> </a>
                     </div>
                 </div>
                 <div class="col-lg-11 col-md-10">
                     <div class="reportar-title">
-                        Posted By {{ $news->user->name }}
+                        Posted By <a href="{{ route('reporter.news.post',$news->user->id) }}">{{ $news->user->name }} </a> 
                     </div>
                     <div class="viwe-count">
                         <ul>

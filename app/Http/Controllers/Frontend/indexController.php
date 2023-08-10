@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\Subcategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -88,5 +89,13 @@ class indexController extends Controller
         session()->put('locale',$request->lang);
 
         return redirect()->back()->with(['message'=>'You have changed language successfully','alert-type'=>'success']);
+    }
+
+    public function reporterWiseNews($id)
+    {
+        $reporter = User::findOrFail($id);
+
+        $news = NewsPost::where(['user_id'=>$id])->get();
+        return view('backend.reporter.reporter_news_post',compact('reporter','news'));
     }
 }
