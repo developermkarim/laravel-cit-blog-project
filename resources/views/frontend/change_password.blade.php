@@ -104,21 +104,22 @@ Old Password
 
 <div class="col-md-12 col-sm-12">
 <div class="contact-title ">
-Confirm New Password 
+Confirm New Password
 </div>
 <div class="contact-form">
 <span class="wpcf7-form-control-wrap sub_title"> 
 	 <input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation"  >
+     <div class="input-group-text" data-password="false">
+        <span class="password-eye"></span>
+    </div>
 </span>
 </div>
 </div>
   
 
- 
-
 </div>
  
- 
+ {{--                         --}}
  
  
 <div class="row">

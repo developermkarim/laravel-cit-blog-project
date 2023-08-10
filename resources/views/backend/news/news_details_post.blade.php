@@ -26,7 +26,7 @@
             </div>
 
             <h1 class="single-page-title">
-                {{ $news->news_title }} </h1>
+                {{GoogleTranslate::trans($news->news_title , app()->getLocale())  }} </h1>
             <div class="row g-2">
                 <div class="col-lg-1 col-md-2 ">
                     <div class="reportar-image">
@@ -41,7 +41,7 @@
                     <div class="viwe-count">
                         <ul>
                             <li><i class="la la-clock-o"></i> Updated
-                                {{ $news->created_at->format('l M d Y') }}
+                                {{ $news->created_at->format('l , M d Y') }}
                             </li>
                             <li> / <i class="la la-eye"></i>
                                 {{ $news->view_count }}
@@ -55,7 +55,8 @@
             <div class="single-image">
                 <a href=" "><img class="lazyload" src="{{ asset($news->image) }}"></a>
                 <h2 class="single-caption2">
-                    {{ $news->news_title }}
+                    {{GoogleTranslate::trans($news->news_title , app()->getLocale())  }}
+
                 </h2>
             </div>
 
@@ -68,13 +69,15 @@
                 </div>
             </div>
             <div class="single-details">
-                <p> {{ $news->news_details }} </p>
+               
+                <p>   {{GoogleTranslate::trans($news->news_details , app()->getLocale())  }} </p>
             </div>
             <div class="singlePage2-tag">
                 <span> Tags : </span>
 
                 @foreach($tags_all as $tag)
-                <a href=" " rel="tag">{{ ucwords($tag) }}</a>
+                <a href=" " rel="tag">                    {{GoogleTranslate::trans(ucwords($tag) , app()->getLocale())  }}
+                </a>
                 @endforeach
             </div>
 
@@ -143,7 +146,7 @@
                 {{-- <form id="comment-form"> --}}
 
                     
-                    <form id="comment-form" action="{{ route('store.review') }}" >
+            <form id="comment-form" action="{{ route('store.review') }}" method="POST">
                 @csrf
 
                 @if (session('status'))
@@ -235,7 +238,9 @@
                                     class="lazyload" src="{{ asset($item->image) }}"></a>
                         </div>
                         <h4 class="related-title">
-                            <a href="{{ url("/news/post/details/$item->id/$item->news_title_slug")  }}">{{ $item->news_title }}
+                            <a href="{{ url("/news/post/details/$item->id/$item->news_title_slug")  }}">
+                                {{GoogleTranslate::trans($news->news_title , app()->getLocale())  }}
+
                             </a>
                         </h4>
                         <div class="related-meta">
@@ -279,9 +284,9 @@
 							@foreach ($latest_posts as $key => $item)
 							<div class="archive-tabWrpp archiveTab-border">
                                 <div class="archiveTab-image ">
-                                    <a href=" "><img class="lazyload" src="{{ asset($item->image) }}"></a> </div>
+                                    <a href="{{ url("news/post/details/$item->id/$item->news_title_slug") }}"><img class="lazyload" src="{{ asset($item->image) }}"></a> </div>
                                 <a href=" " class="archiveTab-icon2"><i class="la la-play"></i></a>
-                                <h4 class="archiveTab_hadding"><a href=" "> {{ Str::limit($item->news_title,30)}} </a>
+                                <h4 class="archiveTab_hadding"><a href=" "> {{ GoogleTranslate::trans(Str::limit($item->news_title,30),app()->getLocale()) }} </a>
                                 </h4>
                                 <div class="archive-conut">
                                    {{ ++$key; }}
@@ -298,13 +303,14 @@
 							@foreach ($popular_posts as $key => $item)
 							<div class="archive-tabWrpp archiveTab-border">
                                 <div class="archiveTab-image ">
-                                    <a href=" "><img class="lazyload" src="{{ asset($item->image) }}"></a> </div>
+                                    <a href="{{ url("news/post/details/$item->id/$item->news_title_slug") }}"><img class="lazyload" src="{{ asset($item->image) }}"></a> </div>
                                 <a href=" " class="archiveTab-icon2"><i class="la la-play"></i></a>
-                                <h4 class="archiveTab_hadding"><a href=" "> {{ Str::limit($item->news_title,30)}} </a>
+                                <h4 class="archiveTab_hadding"><a href=" "> {{ GoogleTranslate::trans(Str::limit($item->news_title,30),app()->getLocale()) }} </a>
                                 </h4>
                                 <div class="archive-conut">
                                    {{ ++$key; }}
                                 </div>
+
                             </div>
 							@endforeach
                           

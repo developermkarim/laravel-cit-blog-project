@@ -43,8 +43,8 @@ class User extends Authenticatable
         return $this->hasMany(NewsPost::class,'user_id','id');
     }
 
-    public function comment()
+  /*   public function comment()
     {
         return $this->hasMany(NewsComment::class);
-    }
+    } */
 }

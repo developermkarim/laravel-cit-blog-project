@@ -31,6 +31,12 @@ Name *
 <div class="contact-form">
 <span class="wpcf7-form-control-wrap sub_title">
     <input type="text" name="name" id="name" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Name"></span>
+    <div class="alert alert-danger" role="alert">
+        @error('name')
+            <span>{{ $message }}</span>
+        @enderror
+        
+    </div>
 </div>
 </div>
 
@@ -41,7 +47,13 @@ Email *
 </div>
 <div class="contact-form">
 <span class="wpcf7-form-control-wrap sub_title">
-    <input type="email" name="email" id="email" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Email"></span>
+    <input type="email" name="email"  id="email" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Email"></span>
+    <div class="alert alert-danger" role="alert">
+        @error('email')
+            <span>{{ $message }}</span>
+        @enderror
+        
+    </div>
 </div>
 </div>
 
@@ -53,6 +65,13 @@ Password *
 <div class="contact-form">
 <span class="wpcf7-form-control-wrap sub_title">
     <input type="password" id="password" name="password" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Password"></span>
+
+    <div class="alert alert-danger" role="alert">
+        @error('password')
+            <span>{{ $message }}</span>
+        @enderror
+        
+    </div>
 </div>
 </div>
 
@@ -64,15 +83,17 @@ Confirm Password *
 <div class="contact-form">
 <span class="wpcf7-form-control-wrap sub_title">
     <input type="password" id="password_confirmation" name="password_confirmation" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Confirm Password"></span>
+
+    <div class="alert alert-danger" role="alert">
+        @error('password_confirmation')
+            <span>{{ $message }}</span>
+        @enderror
+        
+    </div>
 </div>
 </div>
 
-
- 
 </div>
- 
- 
- 
  
 <div class="row">
 <div class="col-md-12">

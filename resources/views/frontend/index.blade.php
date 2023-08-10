@@ -48,7 +48,7 @@
                                                     </a>
                                                 </h6>
                                                 <h1 class="sec-one-title">
-                                                    <a href="{{ url('news/post/details/'.$news->id) . '/' . $news->status }}">{{
+                                                    <a href="{{ url('news/post/details/'.$news->id) . '/' . $news->news_title_slug }}">{{
                                                         GoogleTranslate::trans($news->news_title,app()->getLocale()) }}</a>
                                                 </h1>
                                             </div>
@@ -84,7 +84,7 @@
                             <div class="secOne-smallImg">
                                 <a href=" "><img class="lazyload" src="{{ asset($three->image) }}"></a>
                                 <h5 class="secOne_smallTitle">
-                                    <a href="{{ url("news/details/$three->id/$three->news_title_slug") }}">{{ GoogleTranslate::trans($three->news_title,app()->getLocale()) }}</a>
+                                    <a href="{{ url("news/post/details/$three->id/$three->news_title_slug") }}">{{ GoogleTranslate::trans($three->news_title,app()->getLocale()) }}</a>
                                 </h5>
                             </div>
                         </div>
@@ -179,11 +179,11 @@
 
                             @foreach ($latest_posts as $item)
                                 <div class="tab-image tab-border">
-                                    <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}"><img
+                                    <a href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}"><img
                                             class="lazyload" src="{{ asset($item->image) }}"></a>
                                     <a href=" " class="tab-icon"><i class="la la-play"></i></a>
                                     <h4 class="tab_hadding"><a
-                                            href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ GoogleTranslate::trans($item->news_title, app()->getLocale()) }}
+                                            href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ GoogleTranslate::trans($item->news_title, app()->getLocale()) }}
                                         </a></h4>
                                 </div>
                             @endforeach
@@ -197,11 +197,11 @@
 
                             @foreach ($popular_posts as $item)
                                 <div class="tab-image tab-border">
-                                    <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}"><img
+                                    <a href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}"><img
                                             class="lazyload" src="{{ asset($item->image) }}"></a>
                                     <a href=" " class="tab-icon"><i class="la la-play"></i></a>
                                     <h4 class="tab_hadding"><a
-                                            href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ GoogleTranslate::trans($item->news_title, app()->getLocale()) }}
+                                            href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ GoogleTranslate::trans($item->news_title, app()->getLocale()) }}
                                         </a></h4>
                                 </div>
                             @endforeach
@@ -322,7 +322,7 @@
                                     </div>
                                     <h5 class="sec-two-title">
                                         <a
-                                            href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
+                                            href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
                                         </a>
                                     </h5>
                                 </div>
@@ -352,7 +352,7 @@
                                          </div>
                                          <h5 class="sec-two-title">
                                              <a
-                                                 href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
+                                                 href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
                                              </a>
                                          </h5>
                                      </div>
@@ -412,7 +412,7 @@
                                         <a href=" "><img class="lazyload" src="{{ asset($item->image) }}"></a>
                                     </div>
                                     <h4 class="secThree-title">
-                                        <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">
+                                        <a href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }} ">
                                             {{ GoogleTranslate::trans($item->news_title,app()->getLocale())  }} </a>
                                     </h4>
                                 </div>
@@ -435,7 +435,7 @@
                                             <a href=" " class="small-icon3"><i class="la la-play"></i></a>
                                             <h5 class="secOne_smallTitle">
                                                 <a
-                                                    href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
+                                                    href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }} ">{{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}
                                                 </a>
                                             </h5>
                                         </div>
@@ -519,7 +519,7 @@
                                                     src="{{ asset($item->image) }}"></a>
                                             <h5 class="secFour-title">
                                                 <a
-                                                    href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }} ">
+                                                    href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }} ">
                                                     {{ GoogleTranslate::trans($item->news_title,app()->getLocale()) }}</a>
                                             </h5>
                                         </div>
@@ -581,7 +581,7 @@
                                 <a href=" "><img class="lazyload" src="{{ asset($item->image) }}"></a>
                                 <div class="secFive-title">
                                     <a
-                                        href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ GoogleTranslate::trans($item->news_title,app()->getLocale())  }}</a>
+                                        href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ GoogleTranslate::trans($item->news_title,app()->getLocale())  }}</a>
                                 </div>
                             </div>
                         @endif
@@ -594,7 +594,7 @@
                                 <div class="secFive-smallImg">
                                     <a href=" "><img class="lazyload" src="{{ asset($item->image) }}"></a>
                                     <h5 class="secFive_title2">
-                                        <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">
+                                        <a href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}">
                                             {{  GoogleTranslate::trans($item->news_title,app()->getLocale())  }}</a>
                                     </h5>
                                 </div>
@@ -861,13 +861,13 @@
                                         href=" " class="video-icon6"><i class="la la-play"></i></a>
                                 </div>
                                 <h6 class="secSeven-title">
-                                    <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ $item->news_title }}
+                                    <a href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ $item->news_title }}
                                     </a>
                                 </h6>
                                 <div class="secSeven-details">
 
 
-                                    <a href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">
+                                    <a href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}">
                                         More..</a>
                                 </div>
 
@@ -890,7 +890,7 @@
                                                     src="{{ asset($item->image) }}"></a>
                                             <h5 class="secSeven-title2">
                                                 <a
-                                                    href="{{ url('news/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ $item->news_title }}
+                                                    href="{{ url('news/post/details/' . $item->id . '/' . $item->news_title_slug) }}">{{ $item->news_title }}
                                                 </a>
                                             </h5>
                                         </div>

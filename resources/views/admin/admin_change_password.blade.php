@@ -52,38 +52,54 @@
 
 
     <div class="col-md-12">
-        <div class="mb-3">
-            <label for="firstname" class="form-label">Old Password</label>
+        <label for="lastname" class="form-label">Old Password  </label>
+        <div class="input-group input-group-merge">
             <input type="password" name="old_password" class="form-control @error('old_password') is-invalid @enderror" id="current_password" >
-            @error('old_password')
-            <span class="text-danger">{{ $message }}</span>
-            @enderror 
+            <div class="input-group-text" data-password="false">
+                <span class="password-eye"></span>
+            </div>
+          
         </div>
-    </div>
+        @error('old_password')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror 
+</div>
+      
     
+    <br>
 
 
      <div class="col-md-12">
-        <div class="mb-3">
-            <label for="lastname" class="form-label"> New Password  </label>
-            <input type="password" name="new_password" class="form-control @error('new_password') is-invalid @enderror" id="new_password"  >
-             @error('new_password')
-            <span class="text-danger">{{ $message }}</span>
-            @enderror 
+        <label for="lastname" class="form-label"> New Password  </label>
+        <div class="input-group input-group-merge">
+            <input type="password" name="new_password" class="form-control @error('new_password') is-invalid @enderror" id="new_password" placeholder="Enter your password">
+            <div class="input-group-text" data-password="false">
+                <span class="password-eye"></span>
+            </div>
+          
         </div>
-    </div> <!-- end col -->
-   
-
+        @error('new_password')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror 
+       </div>
+       
 
     <div class="col-md-12">
-        <div class="mb-3">
-            <label for="lastname" class="form-label">Confirm New Password  </label>
+        <label for="lastname" class="form-label">Confirm New Password  </label>
+        <div class="input-group input-group-merge">
             <input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation"  >
+            <div class="input-group-text" data-password="false">
+                <span class="password-eye"></span>
+            </div>
+          
         </div>
-    </div> <!-- end col -->
+        @error('new_password_confirmation')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror 
 
- 
-
+     </div>
+     
+    <!-- end col -->
 
 </div> <!-- end row -->
 

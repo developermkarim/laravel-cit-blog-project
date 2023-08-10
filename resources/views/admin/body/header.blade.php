@@ -64,18 +64,24 @@
 
     @php
         $user = Auth::user();
+        
     @endphp
      
-        @forelse ($user->notifications as $item)
-            
+        @forelse ($user->unreadNotifications as $item)
+        @php
+            $item->markAsRead();
+        @endphp 
        
         <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item">
+
+        <a href="{{ route('review.pending') }}" class="dropdown-item notify-item">
             <div class="notify-icon">
-                <img src="{{ !empty($item->photo) ? asset($item->photo) : asset('upload/no_image.png') }}" class="img-fluid rounded-circle" alt="" /> </div>
-            <p class="notify-details">{{ Str::words($item->comment, 8, '...') }}</p>
-            <p class="text-muted mb-0 user-msg">
-                <small>{{ Carbon\Carbon::parse($item->created_at->diffForHumans()) }}</small>
+                <img src="{{ ($item->notifiable_id==$user->id && $user->role==0) ? asset($user->photo) : 'https://img.freepik.com/premium-vector/diamond-star-shaped-vector-illustration_614742-175.jpg' }}" class="img-fluid rounded-circle" alt="" />
+               {{--  <img src="https://img.freepik.com/premium-vector/diamond-star-shaped-vector-illustration_614742-175.jpg" class="img-fluid rounded-circle" alt="" /> --}}
+             </div>
+            <p class="notify-details">{{ Str::words($item->data['message'], 8, '...') }} 
+               <b>Admin</b>
+                <small>{{ ($item->created_at)->diffForHumans() }}</small>
             </p>
         </a>
       
@@ -114,7 +120,7 @@
     
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-        <img src="{{ (!empty($adminData->photo)) ? url('upload/admin_images/'.$adminData->photo): url('upload/no_image.jpg') }} " alt="user-image" class="rounded-circle">
+        <img src="{{ (!empty($adminData->photo)) ? url($adminData->photo): url('upload/no_image.jpg') }} " alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
                                     {{ $adminData->name }} <i class="mdi mdi-chevron-down"></i> 
                                 </span>

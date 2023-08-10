@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\NewsComment as Comment;
 use App\Models\NewsComment;
+use App\Models\NewsPost;
 use App\Models\User;
 use App\Notifications\Notification\NewCommentNotification;
 use Carbon\Carbon;
@@ -31,6 +32,8 @@ class NewsCommentController extends Controller
         'created_at'=> Carbon::now()
      ]);
 
+     /* News of what for notice set */
+    //  $news = NewsPost::where('id',$request->news_id)->first();
      Notification::send($user,new NewCommentNotification($request));
      return back()->with("status","Review Will Approve By Admin");
 
@@ -38,7 +41,9 @@ class NewsCommentController extends Controller
 
    public function pendingReview()
    {
-     $review = NewsComment::where(['status'=>0])->orderBy('id','DESC')->get();
+     $review = NewsComment::where(['status'=>'0'])->orderBy('id','DESC')->get();
+    //  dd($review);
+    // status value must be enclosed with string like '0' or '1'('1' is optional)
      return view('backend.review.pending_review',compact('review'));
    }
 

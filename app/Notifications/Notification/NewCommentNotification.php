@@ -11,6 +11,7 @@ class NewCommentNotification extends Notification
 {
     use Queueable;
     private $notifyData;
+    // private $ReviewInfo;
     /**
      * Create a new notification instance.
      *
@@ -29,7 +30,8 @@ class NewCommentNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['database'];
+        // ['mail','database'] // this will sent together into gmail and notifications database table setup
     }
 
     /**
@@ -40,11 +42,15 @@ class NewCommentNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        // this is for email , not for database table data
         return (new MailMessage)
-        ->subject('News Review Notification')
+        ->line('The introduction to the notification.')
+        ->action('Notification Action', url('/'))
+        ->line('Thank you for using our application!');
+/*         ->subject('News Review Notification')
         ->line($this->notifyData['content'])
         ->action($this->notifyData['noticeText'], $this->notifyData['noticeUrl'])
-        ->line($this->notifyData['thanks']);
+        ->line($this->notifyData['thanks']); */
     }
 
     /**
@@ -56,7 +62,9 @@ class NewCommentNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message'=>"New Comment added on the News, $notifiable"
+            'message'=>"New Comment added on the News",
+            // 'reviewText'=>$this->ReviewInfo,
+            'notifiable'=> $notifiable,
         ];
     }
 }
