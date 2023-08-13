@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\JustBannerController;
 use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\Backend\PhotoGalleryController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SeoSettingController;
 use App\Http\Controllers\Backend\VideoGalleryController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -226,6 +227,42 @@ Route::controller(SeoSettingController::class)->group(function(){
     Route::get('/seo/setting','SeoSiteSetting')->name('seo.setting');
     Route::post('/update/seo/setting','UpdateSeoSetting')->name('update.seo.setting');
  
+});
+
+// Permission all Route
+Route::controller(RoleController::class)->group(function(){
+
+    // Permission all Route
+
+    Route::get('/all/permission','AllPermission')->name('all.permission');
+    Route::get('/add/permission','AddPermission')->name('add.permission');
+    Route::post('/store/permission','StorePermission')->name('permission.store');
+    Route::get('/edit/permission/{id}','EditPermission')->name('edit.permission');
+    Route::post('/update/permission','UpdatePermission')->name('permission.update');
+
+    Route::delete('/delete/permission/{id}','DeletePermission')->name('delete.permission');
+
+
+    // Roles all Route
+
+    Route::get('/all/roles','AllRoles')->name('all.roles');
+    Route::get('/add/roles','AddRoles')->name('add.roles');
+    Route::post('/store/roles','StoreRoles')->name('roles.store');
+    Route::get('/edit/roles/{id}','EditRoles')->name('edit.roles');
+    Route::post('/update/roles','UpdateRoles')->name('roles.update');
+    Route::get('/delete/roles/{id}','DeleteRoles')->name('delete.roles');
+
+    Route::get('/add/roles/wise/permission','AddRolesPermission')->name('add.roles.wise.permissions');
+    Route::get('/all/roles/wise/permission','AllRolesPermission')->name('all.roles.wise.permissions');
+
+    Route::post('/store/roles/wise/permission','StoreRolesPermission')->name('store.roles.wise.permissions');
+
+    Route::get('/edit/roles/wise/permission/{id}','EditRolesPermission')->name('edit.roles.wise.permissions');
+    
+    Route::post('/update/roles/wise/permission','UpdateRolesPermission')->name('update.roles.wise.permissions');
+
+    Route::get('/delete/roles/wise/permission/{id}','DeleteRolesPermission')->name('delete.roles.wise.permissions');
+
 });
 
 }); // This end is of admin role middleware

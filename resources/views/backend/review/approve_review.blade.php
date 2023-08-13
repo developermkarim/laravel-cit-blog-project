@@ -60,7 +60,7 @@
 
                     </td> 
                     <td>
-      <a href="{{ route('delete.review',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light" id="delete" >Delete </a>
+      <a href="{{ route('delete.review',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light" id="DeleteBtn" >Delete </a>
   
                     </td> 
                 </tr>

@@ -12,10 +12,10 @@
                                 <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <a href="{{ route('add.photo.gallery') }}" class="btn btn-blue waves-effect waves-light">Add Photo</a>
+                    <a href="{{ route('add.permission') }}" class="btn btn-blue waves-effect waves-light">Add Permission</a>
                 </ol>
             </div>
-                                    <h4 class="page-title">Photo Gallery All </h4>
+                                    <h4 class="page-title">Permission All </h4>
                                 </div>
                             </div>
                         </div>     
@@ -31,24 +31,29 @@
             <thead>
                 <tr>
                     <th>Sl</th>
-                    <th>Image  </th>
-                    <th>Date</th>
+                    <th>Permission Name </th>
+                    <th>Group Name </th>
                     <th>Action </th> 
                 </tr>
             </thead>
         
         
             <tbody>
-            	@foreach($photo as $key=> $item)
+            	@foreach($permissions as $key=> $item)
                 <tr>
                     <td>{{ $key+1 }}</td>
-                    <td><img src="{{ asset($item->photo_gallery ) }}"  style="width:50px; height:50px;"> </td>
-                    <td>{{ $item->post_date }}</td>
+                    <td>{{ $item->name }}</td>
+                     <td>{{ $item->group_name }}</td>
                     <td>
-      <a href="{{ route('edit.photo.gallery',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
+      <a href="{{ route('edit.permission',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
 
-      <a href="{{ route('delete.photo.gallery',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="DeleteBtn">Delete</a>
+      <form action="/delete/permission/{{ $item->id }}" method="post">
+        @csrf
+        @method('DELETE')
 
+       {{--  <input type="hidden" name="deleteId" value="{{ $item->id }}"> --}}
+      <input type="submit" class="btn btn-danger rounded-pill waves-effect waves-light delete_permission" id="delete" value="delete">
+    </form>
                     </td> 
                 </tr>
                 @endforeach
@@ -67,8 +72,18 @@
                     </div> <!-- container -->
 
                 </div> <!-- content -->
+{{-- Here Delete By ajax  --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('.delete_permission').on('click',function(e)=>{
+        e.preventDefault();
+        if(confirm('Are you Sure Want to Delete it')){
+            $(e.target).closest('form').submit()
+        }
+    })
+</script>
 
-@endsection
+                @endsection
 
 
 

@@ -200,6 +200,7 @@ return [
         * third Party Service Provider Here
         */
         Intervention\Image\ImageServiceProvider::class,
+        \Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*

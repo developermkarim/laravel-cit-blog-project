@@ -12,10 +12,10 @@
                                 <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <a href="{{ route('add.photo.gallery') }}" class="btn btn-blue waves-effect waves-light">Add Photo</a>
+                    <a href="{{ route('add.roles') }}" class="btn btn-blue waves-effect waves-light">Add Roles</a>
                 </ol>
             </div>
-                                    <h4 class="page-title">Photo Gallery All </h4>
+                                    <h4 class="page-title">Roles All </h4>
                                 </div>
                             </div>
                         </div>     
@@ -31,28 +31,50 @@
             <thead>
                 <tr>
                     <th>Sl</th>
-                    <th>Image  </th>
-                    <th>Date</th>
-                    <th>Action </th> 
+                    <th>Roles Name </th> 
+                    <th>Permissions </th> 
+                    <th width="18%">Action </th> 
                 </tr>
             </thead>
         
-        
+        @php
+           
+        @endphp
             <tbody>
-            	@foreach($photo as $key=> $item)
+                @foreach ($roles as $key => $role)
                 <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td><img src="{{ asset($item->photo_gallery ) }}"  style="width:50px; height:50px;"> </td>
-                    <td>{{ $item->post_date }}</td>
                     <td>
-      <a href="{{ route('edit.photo.gallery',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
+                        {{ ++$key }}
+                    </td>
 
-      <a href="{{ route('delete.photo.gallery',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="DeleteBtn">Delete</a>
+                    <td>
+                     
+                         {{  $role->name  }}
+                         
+                       
+                    </td> 
+
+                   
+                    
+                    <td>
+                        @foreach ($role->permissions as $permission)
+                        <span class="badge rounded-pill bg-danger">    {{ $permission->name  }} </span>  
+                            @endforeach
+                    
+
+                    </td>
+                   
+
+                    <td>
+      <a href="{{ route('edit.roles.wise.permissions',$role->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
+
+      <a id="DeleteBtn" href="{{ route('delete.roles.wise.permissions',$role->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
 
                     </td> 
                 </tr>
+               
                 @endforeach
-                 
+
             </tbody>
         </table>
 

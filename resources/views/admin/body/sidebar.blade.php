@@ -232,6 +232,40 @@
 
 
 
+             <li>
+                <a href="#role-permission" data-bs-toggle="collapse">
+                    <i class="mdi mdi-email-multiple-outline"></i>
+                    <span> Role And Permission </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="role-permission">
+                    <ul class="nav-second-level">
+                        
+                        <li>
+                            <a href="{{ route('all.roles') }}"> All Roles </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('all.permission') }}"> All Permissions </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('add.roles.wise.permissions') }}">Add Role Wise Permissions </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('all.roles.wise.permissions') }}">All Role Wise Permissions </a>
+                        </li>
+                        
+                    </ul>
+
+                </div>
+            </li>
+
+
+
+
+
 
      <li class="menu-title mt-2">Menu</li>
   <li>

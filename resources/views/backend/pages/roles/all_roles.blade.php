@@ -12,10 +12,10 @@
                                 <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <a href="{{ route('add.photo.gallery') }}" class="btn btn-blue waves-effect waves-light">Add Photo</a>
+                    <a href="{{ route('add.roles') }}" class="btn btn-blue waves-effect waves-light">Add Roles</a>
                 </ol>
             </div>
-                                    <h4 class="page-title">Photo Gallery All </h4>
+                                    <h4 class="page-title">Roles All </h4>
                                 </div>
                             </div>
                         </div>     
@@ -31,23 +31,21 @@
             <thead>
                 <tr>
                     <th>Sl</th>
-                    <th>Image  </th>
-                    <th>Date</th>
+                    <th>Roles Name </th> 
                     <th>Action </th> 
                 </tr>
             </thead>
         
         
             <tbody>
-            	@foreach($photo as $key=> $item)
+            	@foreach($roles as $key=> $item)
                 <tr>
                     <td>{{ $key+1 }}</td>
-                    <td><img src="{{ asset($item->photo_gallery ) }}"  style="width:50px; height:50px;"> </td>
-                    <td>{{ $item->post_date }}</td>
+                    <td>{{ $item->name }}</td> 
                     <td>
-      <a href="{{ route('edit.photo.gallery',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
+      <a href="{{ route('edit.roles',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
 
-      <a href="{{ route('delete.photo.gallery',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="DeleteBtn">Delete</a>
+      <a href="{{ route('delete.roles',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="DeleteBtn">Delete</a>
 
                     </td> 
                 </tr>

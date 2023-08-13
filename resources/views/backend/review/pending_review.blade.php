@@ -78,7 +78,7 @@
 
                                         <a href="{{ url("delete/review/$item->id") }}"
                                             class="btn btn-danger rounded-pill waves-effect waves-light"
-                                            id="delete">Delete</a>
+                                            id="DeleteBtn">Delete</a>
 
 
                                         <a href="" class="btn btn-primary rounded-pill waves-effect waves-light"
