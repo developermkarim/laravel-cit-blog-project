@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\Cast\Object_;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -306,7 +305,7 @@ class RoleController extends Controller
 
         $role_id = $request->id;
         $role = Role::findOrFail($role_id);
-        $data=[];
+      
         $isUpdated=false;
       $permissions = $request->permission;
         if(!empty($permissions)){

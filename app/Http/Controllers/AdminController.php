@@ -8,6 +8,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+
 
 class AdminController extends Controller
 { 
@@ -123,9 +127,10 @@ class AdminController extends Controller
 
     public function addAdmin()
     {
-        $adminRoles = User::select('role')->groupBy('role')->get();
+        // $adminRoles = User::select('role')->groupBy('role')->get();
         // dd($adminRoles);
-        return view('backend.admin.admin_add',compact('adminRoles'));
+        $roles = Role::all();
+        return view('backend.admin.admin_add',compact('roles'));
     }
 
     public function storeAdmin(Request $request)
@@ -148,14 +153,20 @@ class AdminController extends Controller
         $admin->username = $request->username;
         $admin->phone = $request->phone;
         $admin->password = Hash::make($request->password); 
-        $admin->role = $request->roles;
-       
-         $admin->status = $request->roles == 'admin' ? 'active' : 'inactive';
+        
+        $admin->role = 'Admin';
+
+        //  $admin->status =  $request->roles == 'admin' ? 'active' : 'inactive';
+        $admin->status = 'inactive';
         
         $admin->remember_token = Str::random(10);
 
         //  dd($admin);
         if($admin->save()){
+
+            $request->roles ? $admin->assignRole($request->roles) :  false;
+            
+
             $notification = [
                 'message'=> "New $request->roles is successfully regsitered",
                 'alert-type'=>'info' 
@@ -168,7 +179,7 @@ class AdminController extends Controller
     {
         $admin = User::findOrFail($id);
         // dd($admin->role);
-        $roles = User::select('role')->groupBy('role')->get();
+        $roles = Role::all();
         // dd($roles);
         return view('backend.admin.admin_edit',compact('admin','roles'));
     }
@@ -177,14 +188,17 @@ class AdminController extends Controller
     {
         $admin = User::findOrFail($request->id);
         
+        //  dd($admin);
 
        if($request->hasFile('photo')){
+        @unlink($admin->photo);
+
         $mainImage = $request->file('photo');
         $optimizeImage = $request->username . '-' . rand(55,999) . '.' . $request->file('photo')->getClientOriginalExtension(); 
         Image::make($mainImage)->resize(450,function($contraint){$contraint->aspectRatio();})->save('upload/admin_images/' . $optimizeImage); 
         $save_url = 'upload/admin_images/' . $optimizeImage;
        }else{
-        $save_url = $admin->image;
+        $save_url = $admin->photo;
        }
 
         $admin->name = $request->name;
@@ -192,15 +206,21 @@ class AdminController extends Controller
         $admin->username = $request->username;
         $admin->phone = $request->phone;
         $admin->photo =  $save_url;
-        $admin->role = $request->roles;
+
+        /* assign role */
+        
        
          $admin->status = $request->roles == 'admin' ? 'active' : 'inactive';
         
         $admin->remember_token = Str::random(10);
 
         if($admin->save()){
+
+            $admin->roles()->detach();
+            $request->roles ? $admin->assignRole($request->roles) : false;
+
             $notification = [
-                'message'=> " $request->roles's data is successfully Updated",
+                'message'=> "admin data is successfully Updated",
                 'alert-type'=>'info' 
             ];
             return redirect('all/admin')->with($notification);

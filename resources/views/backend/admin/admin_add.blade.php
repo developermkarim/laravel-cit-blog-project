@@ -67,9 +67,9 @@
                <select name="roles" class="form-select" id="example-select">
                   
                    <option value="">Select One Role</option>
-                   @foreach ($adminRoles as $item)
-                   <option value="{{ $item->role }}">
-                    {{ $item->role }}
+                   @foreach ($roles as $item)
+                   <option value="{{ $item->id }}">
+                    {{ $item->name }}
                 </option>
                    @endforeach
                 </select>

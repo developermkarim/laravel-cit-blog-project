@@ -69,9 +69,9 @@
                <select name="roles" class="form-select" id="example-select">
                   
                    <option value="">Select One Role</option>
-                   @foreach ($roles as $item)
-                   <option  @selected($admin->role === $item->role) value="{{ $item->role }}">
-                    {{ $item->role }}
+                   @foreach ($roles as $role)
+                   <option  @selected($admin->hasRole($role->name)) value="{{ $role->id }}">
+                    {{ $role->name }}
                 </option>
                    @endforeach
                 </select>
@@ -119,9 +119,7 @@
                 phone: {
                     required : true,
                 }, 
-                photo: {
-                    required : true,
-                }, 
+               
                 password: {
                     required : true,
                 }, 
@@ -142,9 +140,7 @@
                 phone: {
                     required : 'Please Enter Your Phone',
                 },
-                photo: {
-                    required : 'Please Upload Your Image',
-                },
+                
                 password: {
                     required : 'Please Enter Your Password',
                 },

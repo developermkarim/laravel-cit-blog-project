@@ -35,6 +35,7 @@
                     <th>Name </th>
                     <th>Email </th>
                     <th>Phone </th>
+                    <th> Role </th>
                     <th>Status </th> 
                     <th>Action </th> 
                 </tr>
@@ -49,6 +50,13 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->phone }}</td>
+                    <td>
+                        @foreach ($item->roles as $role)
+                            <span class="badge rounded-pill bg-purple-500">{{ $role->name }}</span>                            
+                        @endforeach
+                    </td>
+
+                   
                     <td>
       @if($item->status == 'active')
       <span class="badge badge-pill bg-success">Active</span>
