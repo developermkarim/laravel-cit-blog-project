@@ -87,7 +87,8 @@ class RoleController extends Controller
 
         );
 
-        return redirect()->route('all.permission')->with($notification);  
+         return redirect()->route('all.permission')->with($notification);  
+        // return redirect()->back()->with($notification);  
        
     }
 
