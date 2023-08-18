@@ -33,6 +33,7 @@
                     <th>Sl</th>
                     <th>Image  </th>
                     <th>Date</th>
+                    <th>Tags</th>
                     <th>Action </th> 
                 </tr>
             </thead>
@@ -44,6 +45,16 @@
                     <td>{{ $key+1 }}</td>
                     <td><img src="{{ asset($item->photo_gallery ) }}"  style="width:50px; height:50px;"> </td>
                     <td>{{ $item->post_date }}</td>
+
+                    <td>
+                        @php
+                            $allTags = $item->tags->pluck('name')->toArray();
+                        @endphp
+                        @foreach ($allTags as $tag)
+                            <span class="badge fill-round bg-primary">{{ $tag }}</span>
+                        @endforeach
+                    </td>
+
                     <td>
       <a href="{{ route('edit.photo.gallery',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
 

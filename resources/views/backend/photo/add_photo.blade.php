@@ -40,6 +40,11 @@
                 <div class="row" id="preview_img"></div>
 
             </div>
+
+            <div class="form-group col-md-8 mb-3">
+                <label for="inputEmail4" class="form-label">Tags  </label>
+                <input type="text" name="tags"  class="selectize-close-btn" value="{{ old('tags') }}">
+            </div>
              
         </div>
  

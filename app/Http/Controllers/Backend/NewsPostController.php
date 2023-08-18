@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\Subcategory;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -25,7 +26,8 @@ class NewsPostController extends Controller
         $subcategories = Subcategory::latest()->get();
         $adminuser = User::where('role','admin')->latest()->get();
        return view('backend.news.add_news_post',compact('categories','subcategories','adminuser'));
-   }// End Method
+
+   } // End Method
 
    
     public function storeNewsPost(Request $request){
@@ -38,12 +40,15 @@ class NewsPostController extends Controller
         Image::make($image)->resize(784,436)->save('upload/news/' . $originalImage);
 
         $save_url = 'upload/news/' . $originalImage;
-        }else{
+
+        }
+        else{
             $save_url = 'upload/' . 'no_image.jpg';
         }
         
         // dd($save_url);
-      $isSaved =   NewsPost::insert([
+        // dd($request->tags);
+      $newsSaved =   NewsPost::create([
             'category_id' => $request->category_id,
             'subcategory_id' => $request->subcategory_id,
             'user_id' => $request->user_id,
@@ -51,7 +56,6 @@ class NewsPostController extends Controller
             'news_title_slug' => strtolower(str_replace(' ','-',$request->news_title)),
 
             'news_details' => $request->news_details,
-            'tags' => $request->tags,
 
             'breaking_news' => $request->breaking_news,
             'top_slider' => $request->top_slider,
@@ -63,8 +67,22 @@ class NewsPostController extends Controller
             'image' => $save_url,
             'created_at' => Carbon::now(),  
         ]);
+
+        //  dd($isSaved);
+       /* NewsPost Tag Inserted to this Here */
        
-        if($isSaved){
+    //    $isSaved->tags->attach([1,2]);
+
+    $tags = explode(',', $request->input('tags'));
+
+    foreach ($tags as $tagName) {
+        $tag = Tag::insertGetId(['name' => $tagName]);
+        $newsSaved->tags()->attach($tag);
+    }
+
+        if($newsSaved){
+            /* NewsPost Tag Inserted to this Here */
+
             $notification = [
                 'message'=>'News Post successfully saved',
                 'alert-type'=>'info'
@@ -77,11 +95,14 @@ class NewsPostController extends Controller
    public function editNewsPost($id)
    {
      $categories = Category::latest()->get();
-
+     
      $subcategories = Subcategory::orderBy('subcategory_name','ASC')->get();
      $adminuser = User::where('role','admin')->latest()->get();
     $newsPost = NewsPost::findOrFail($id);
-     return view('backend.news.edit_news_post',compact('categories','subcategories','adminuser','newsPost'));
+    // $tags =  Tag::all();
+    $existingTags = $newsPost->tags()->pluck('name')->implode(',');
+    //   dd($existingTags);
+     return view('backend.news.edit_news_post',compact('categories','subcategories','adminuser','newsPost','existingTags'));
 
    }
 
@@ -90,8 +111,8 @@ class NewsPostController extends Controller
      $newsPost = NewsPost::findOrFail($request->id);
     //  dd($newsPost);
     if($request->hasFile('image')){
-        unlink($newsPost->image);
-    $image = $request->file('image');
+       $newsPost->image ? unlink($newsPost->image) : '';
+     $image = $request->file('image');
         
     $originalImage = hexdec(uniqid()) . '.' . strtolower($request->file('image')->getClientOriginalExtension());
 
@@ -111,7 +132,7 @@ $isUpdate =   NewsPost::where(['id'=>$request->id])->update([
     'news_title_slug' => strtolower(str_replace(' ','-',$request->news_title)),
 
     'news_details' => $request->news_details,
-    'tags' => $request->tags,
+    // 'tags' => $request->tags,
 
     'breaking_news' => $request->breaking_news,
     'top_slider' => $request->top_slider,
@@ -124,6 +145,13 @@ $isUpdate =   NewsPost::where(['id'=>$request->id])->update([
     'created_at' => Carbon::now(),  
 ]);
 
+$tags = explode(',',$request->tags);
+$tagIds = [];
+foreach ($tags as $key => $value) {
+    $tag = Tag::firstOrCreate(['name'=>trim($value)]);
+    $tagIds[] = $tag->id;
+}
+$newsPost->tags()->sync($tagIds);
 // dd($isUpdate);
 if($isUpdate===1){
     $notification = [
@@ -146,6 +174,10 @@ public function deleteNewsPost($id)
     if($newsPost->image != null && $newsPost->image == 'upload/news/' .  $image){
         unlink($newsPost->image);
     }
+    /* Delete Related Tags */
+
+    $newsPost->tags()->detach();
+    
     if($newsPost->delete()){
 
         $notification = [

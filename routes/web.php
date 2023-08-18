@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\JustBannerController;
 use App\Http\Controllers\Backend\NewsPostController;
+use App\Http\Controllers\Backend\OnlinePollController;
 use App\Http\Controllers\Backend\PhotoGalleryController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SeoSettingController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Backend\VideoGalleryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\NewsCommentController as CommentController;
 use App\Http\Controllers\Frontend\NewsCommentController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -265,6 +267,42 @@ Route::controller(RoleController::class)->group(function(){
 
 });
 
+/* Common Pages Routes Here by admin */
+
+Route::controller(PageController::class)->group(function(){
+
+    Route::get('get/about','aboutPage')->name('page.about');
+    Route::post('update/about','updateAboutPage')->name('update.about');
+
+    Route::get('get/contact','contactPage')->name('page.contact');
+    Route::post('update/contact','updateContactPage')->name('update.contact');
+
+    Route::get('get/faq','FAQPage')->name('page.faq');
+    Route::post('update/faq','updateFAQPage')->name('update.faq');
+
+    Route::get('get/disclaimer','disclaimerPage')->name('page.disclaimer');
+    Route::post('update/disclaimer','updatedisclaimerPage')->name('update.disclaimer');
+
+    Route::get('get/terms','termsPage')->name('page.terms');
+    Route::post('update/terms','updatetermsPage')->name('update.terms');
+
+    Route::get('get/privacy','privacyPage')->name('page.privacy');
+    Route::post('update/privacy','updateprivacyPage')->name('update.privacy');
+});
+
+
+Route::controller(OnlinePollController::class)->group(function(){
+  
+    Route::get('/all/poll','Allpoll')->name('all.poll');
+    Route::get('/add/poll','Addpoll')->name('add.poll');
+    Route::post('/store/poll','Storepoll')->name('poll.store');
+    Route::get('/edit/poll/{id}','Editpoll')->name('edit.poll');
+    Route::post('/update/poll','Updatepoll')->name('poll.update');
+    Route::get('/delete/poll/{id}','Deletepoll')->name('delete.poll');
+
+    
+});
+
 }); // This end is of admin role middleware
 
 
@@ -288,6 +326,8 @@ Route::controller(IndexController::class)->group(function(){
 
 
     Route::post('store/review/',[NewsCommentController::class,'storeReview'])->name('store.review');
+
+    Route::post('vote/store',[OnlinePollController::class,'VoteYesNoUpdateResult'])->name('vote.store');
 
 
 

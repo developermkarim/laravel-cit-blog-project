@@ -115,6 +115,49 @@
         </div>
     </li>
 
+
+    
+    <li>
+        <a href="#newssidebarAuth" data-bs-toggle="collapse">
+            <i class="mdi mdi-account-circle-outline"></i>
+            <span> Page Settings  </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="newssidebarAuth">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('page.about') }}">About</a>
+                </li>
+                <li>
+                    <a href="{{ route('page.contact') }}">Contact</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('page.faq') }}">FAQ</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('page.disclaimer') }}">Disclaimer</a>
+                </li>
+                <li>
+                    <a href="{{ route('page.terms') }}">Terms</a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('page.privacy') }}">Privacy</a>
+                </li>
+
+               {{--   <li>
+                    <a href="{{ route('add.news.post') }}">Add News </a>
+                </li> --}}
+                
+                
+            </ul>
+
+
+        </div>
+    </li>
+
     {{-- Banner Here --}}
 
     <li>
@@ -263,7 +306,12 @@
 
 
 
-
+     <li>
+        <a href="{{ route('all.poll') }}">
+             <i class="mdi mdi-view-dashboard-outline"></i>
+            <span> Online Poll </span>
+        </a>
+    </li>
 
 
      <li class="menu-title mt-2">Menu</li>

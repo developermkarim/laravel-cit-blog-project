@@ -125,27 +125,42 @@
         <table id="basic-datatable" class="table dt-responsive nowrap w-100">
             <thead>
                 <tr>
-                    <th>Sl</th>
-                    <th>Image </th>
+                    {{-- <th>Sl</th> --}}
+                    <th>SL &nbsp; &nbsp; Image </th>
                     <th>Title </th>
-                    <th>Category </th>
-                    <th>User </th>
+                    <th>Category &nbsp; &nbsp; User </th>
                     <th>Date </th>
+                    <th>Tags </th>
                     <th>Status </th> 
                     <th>Action </th> 
                 </tr>
             </thead>
         
-        
+        <?php
+        $categories = App\Models\Category::all();
+        ?>
             <tbody>
             	@foreach($allnews as $key=> $item)
                 <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td><img src="{{ asset($item->image) }} " style="width: :50px; height:50px;" ></td>
+                    {{-- <td>{{ $key+1 }}</td> --}}
+                    <td> {{ $key+1 }} &nbsp; &nbsp;
+                         <img src="{{ asset($item->image) }} " style="width:50px; height:50px;" ></td>
+
                     <td>{{ Str::limit($item->news_title,25, '...') }}</td>
-                    <td>{{ $item->category_id   }}</td>
-                     <td>{{ $item->user_id }}</td>
-                    <td></td>
+                    <td>{{ $item->category->category_name   }} &nbsp;
+                        {{ $item->user->username }}</td>
+                    <td>{{ $item->created_at->diffForHumans() }}</td>
+                    <td>
+                        @php
+                           $tags =  $item->tags()->pluck('name')->toArray();
+                          
+                        @endphp
+                        @if($item->tags()!= null)
+                    @foreach ($tags as $tag)
+                        <span class="badge fill-round bg-primary">{{ $tag }}</span>
+                    @endforeach
+                    @endif
+                    </td>
                     <td>
       @if($item->status == 1)
       <span class="badge badge-pill bg-danger">InActive</span>
@@ -157,7 +172,7 @@
                         
 
                     </td> 
-                    <td>
+                    <td colspan="2">
       <a href="{{ route('edit.news.post',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
 
       <a href="{{ route('delete.news.post',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="DeleteBtn">Delete</a>

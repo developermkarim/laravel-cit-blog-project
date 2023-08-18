@@ -45,7 +45,7 @@
 
              <div class="form-group col-md-6 mb-3">
                 <label for="inputEmail4" class="form-label"> Sub Category </label>
-               <select name="subcategory_id" class="form-select" id="subcategory_id">
+               <select name="subcategory_id"  class="form-select" id="subcategory_id">
                 <option> </option>
                 
             </select>
@@ -65,7 +65,7 @@
 
              <div class="form-group col-md-6 mb-3">
                 <label for="inputEmail4" class="form-label">News Title  </label>
-                <input type="text" name="news_title" class="form-control" id="inputEmail4" >
+                <input type="text" name="news_title" value="{{ old('news_title') }}" class="form-control" id="inputEmail4" >
             </div>
 
              <div class="form-group col-md-6 mb-3">
@@ -83,13 +83,13 @@
 
  <div class="col-12 mb-3">
      <label for="inputEmail4" class="form-label">News Details  </label>
-            <textarea class="form-control" name="news_details"></textarea>    
+            <textarea class="form-control"  value="{{ old('news_details') }}" name="news_details"></textarea>    
             </div>
 
 
  <div class="form-group col-md-6 mb-3">
                 <label for="inputEmail4" class="form-label">Tags  </label>
-                <input type="text" name="tags" class="selectize-close-btn" value="awesome">
+                <input type="text" name="tags"  class="selectize-close-btn" value="{{ old('tags') }}">
             </div>
 
 

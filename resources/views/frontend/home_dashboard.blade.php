@@ -63,6 +63,9 @@ img.emoji {
  
 <div class="main_website">
 
+	@php
+		 ini_set('max_execution_time', 180); // 3 minutes to excution time
+	@endphp
 
 @include('frontend.body.header')
 @include('frontend.body.breaking_news')

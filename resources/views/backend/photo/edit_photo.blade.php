@@ -47,6 +47,12 @@
          <img src="{{ asset($photogallery->photo_gallery)  }}" style="width:400px; height: 200px;">
 
             </div>
+
+
+            <div class="form-group col-md-8 mb-3">
+                <label for="inputEmail4" class="form-label">Tags  </label>
+                <input type="text" name="tags" value="{{ $existingTags }}" class="selectize-close-btn" value="{{ old('tags') }}">
+            </div>
              
         </div>
  
