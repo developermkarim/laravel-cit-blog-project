@@ -152,6 +152,9 @@ foreach ($tags as $key => $value) {
     $tagIds[] = $tag->id;
 }
 $newsPost->tags()->sync($tagIds);
+// delete tags which news is associated with tag
+Tag::has('newsPost','=',0)->delete(); 
+
 // dd($isUpdate);
 if($isUpdate===1){
     $notification = [
@@ -167,6 +170,8 @@ public function deleteNewsPost($id)
 {
     $newsPost = NewsPost::findOrFail($id);
     // dd($newsPost);
+    $$prev_tags_id = $newsPost->tags->pluck('id')->toArray();
+
     $imageUrl = $newsPost->image;
     $imageArr = explode('/',$imageUrl);
     $image = $imageArr[count($imageArr) - 1];
@@ -179,7 +184,8 @@ public function deleteNewsPost($id)
     $newsPost->tags()->detach();
     
     if($newsPost->delete()){
-
+    // Deleting the related tags with no tag is associated with deletable news 
+    Tag::whereId('id',$prev_tags_id)->has('newsPost','=',0)->delete();
         $notification = [
             'message'=>'News Post Successfully Deleted',
             'alert-type'=> 'success'
