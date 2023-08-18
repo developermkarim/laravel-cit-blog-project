@@ -33,6 +33,7 @@
                      <th>Sl</th>
                      <th>Image  </th>
                      <th>Title  </th>
+                     <th> Tags  </th>
                      <th>Date</th>
                      <th>Action </th> 
                 </tr>
@@ -45,6 +46,14 @@
                     <td>{{ $key+1 }}</td>
                     <td><img src="{{ asset($item->video_image ) }}"  style="width:50px; height:50px;"> </td>
                     <td>{{ $item->video_title }}</td>
+                    <td>
+                        <?php
+                        $tags = $item->tags->pluck('name')->toArray();
+                        ?>
+                        @foreach ($tags as $tag)
+                            <span class="badge fill-round bg-primary">{{ $tag }}</span>
+                        @endforeach
+                    </td>
                     <td>{{ $item->post_date }}</td>
                     <td>
       <a href="{{ route('edit.video.gallery',$item->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>

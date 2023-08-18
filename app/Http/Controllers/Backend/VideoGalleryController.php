@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 
 use App\Models\LiveTv;
+use App\Models\Tag;
 
 class VideoGalleryController extends Controller
 {
@@ -32,7 +33,7 @@ class VideoGalleryController extends Controller
         Image::make($image)->resize(784,436)->save('upload/video/'.$name_gen);
         $save_url = 'upload/video/'.$name_gen;
 
-        VideoGallery::insert([
+      $videoGallery =  VideoGallery::create([
 
             'video_title' => $request->video_title,
             'video_url' => $request->video_url,  
@@ -40,6 +41,14 @@ class VideoGalleryController extends Controller
             'video_image' => $save_url, 
 
         ]);
+
+        $tags = explode(',',$request->input('tags'));
+        $tagIds = [];
+        foreach ($tags as  $tag) {
+            $storeTag = Tag::firstOrCreate(['name'=>trim($tag)]);
+            $tagIds[] = $storeTag->id;
+        }
+        $videoGallery->tags()->attach($tagIds);
 
          $notification = array(
             'message' => 'Video Inserted Successfully',
@@ -56,7 +65,9 @@ class VideoGalleryController extends Controller
     public function EditVideoGallery($id){
 
         $video = VideoGallery::findOrFail($id);
-        return view('backend.video.edit_video',compact('video'));
+        $existing_tags = $video->tags->pluck('name')->implode(',');
+        // dd($existing_tags);
+        return view('backend.video.edit_video',compact('video','existing_tags'));
 
     }// End Method
 
@@ -65,6 +76,7 @@ class VideoGalleryController extends Controller
 
         $video_id = $request->id;
         $videoImage = VideoGallery::findOrFail($video_id);
+        $prev_tags = $videoImage->tags->pluck('id')->toArray();
         if ($request->file('video_image')) {
 
         unlink($videoImage->video_image);
@@ -83,6 +95,8 @@ class VideoGalleryController extends Controller
 
         ]);
 
+      
+
          $notification = array(
             'message' => 'Video Update With Image Successfully',
             'alert-type' => 'success'
@@ -100,6 +114,18 @@ class VideoGalleryController extends Controller
 
         ]);
 
+        //    $videoImage->tags()->detach();
+          $tags = explode(',', $request->input('tags'));
+          $tagID=[];
+          foreach ($tags as $tagName) {
+              $tag = Tag::firstOrCreate(['name' => $tagName]);
+              $tagID[]=$tag->id;
+          };
+  
+          $videoImage->tags()->sync($tagID);
+          // Delete the tag that is associated with video image
+          Tag::whereIn('id',$prev_tags)->has('videoGallary','=',0)->delete();
+
          $notification = array(
             'message' => 'Video Update Without Image Successfully',
             'alert-type' => 'success'
@@ -115,10 +141,14 @@ class VideoGalleryController extends Controller
      public function DeleteVideoGallery($id){
 
         $photo = VideoGallery::findOrFail($id);
+        $tagIds = $photo->tags->pluck('id')->toArray();
         $img = $photo->video_image;
         unlink($img);
 
+        $photo->tags()->detach();
         VideoGallery::findOrFail($id)->delete();
+
+        Tag::whereIn('id',$tagIds)->has('videoGallary','=',0)->delete();
 
         $notification = array(
             'message' => 'Video Gallery Deleted Successfully',

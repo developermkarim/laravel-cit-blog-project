@@ -56,7 +56,10 @@
                 <img id="showImage" src="{{ asset($video->video_image)  }} " class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
             </div>
 
-             
+            <div class="form-group col-md-8 mb-3">
+                <label for="inputEmail4" class="form-label">Tags  </label>
+                <input type="text" name="tags"  class="selectize-close-btn" value="{{ $existing_tags }}">
+            </div>
 
            
              

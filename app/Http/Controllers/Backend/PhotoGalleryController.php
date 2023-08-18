@@ -76,6 +76,7 @@ class PhotoGalleryController extends Controller
     public function UpdatePhotoGallery(Request $request){
         $photo_id = $request->id;
        $photogallery = PhotoGallery::findOrFail($photo_id);
+       $prev_tags = $photogallery->tags->pluck('id')->toArray();
         if ($request->file('multi_image')) {
             
     $image = $request->file('multi_image'); 
@@ -96,10 +97,12 @@ class PhotoGalleryController extends Controller
                     $tag = Tag::firstOrCreate(['name' => $tagName]);
                     $tagID[]=$tag->id;
                 }
+
                 $photogallery->tags()->sync($tagID);
 
             // Delete tags with no associations photogallery data
-           Tag::has('photoGallary', '=', 0)->delete();
+                 // Delete tags with no associations
+                 Tag::whereIn('id',$prev_tags)->has('photoGallary','=',0)->delete();
 
         $notification = array(
             'message' => 'Photo Gallery Updated Successfully',

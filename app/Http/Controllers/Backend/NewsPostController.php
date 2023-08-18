@@ -50,7 +50,7 @@ class NewsPostController extends Controller
         // dd($request->tags);
       $newsSaved =   NewsPost::create([
             'category_id' => $request->category_id,
-            'subcategory_id' => $request->subcategory_id,
+            'subcategory_id' => $request->subcategory_id ?? '0',
             'user_id' => $request->user_id,
             'news_title' => $request->news_title,
             'news_title_slug' => strtolower(str_replace(' ','-',$request->news_title)),
@@ -70,7 +70,6 @@ class NewsPostController extends Controller
 
         //  dd($isSaved);
        /* NewsPost Tag Inserted to this Here */
-       
     //    $isSaved->tags->attach([1,2]);
 
     $tags = explode(',', $request->input('tags'));
@@ -109,7 +108,13 @@ class NewsPostController extends Controller
    public function updateNewsPost(Request $request)
    {
      $newsPost = NewsPost::findOrFail($request->id);
-    //  dd($newsPost);
+
+    //  $newsTags = NewsPost::with('tags')->find($request->id);
+    // dd($newsTags->id);
+    // 
+    // $prev_tags = $newsTags ?  $newsTags->tags->pluck('id')->toArray():0;
+     
+    // dd($prev_tags);
     if($request->hasFile('image')){
        $newsPost->image ? unlink($newsPost->image) : '';
      $image = $request->file('image');
@@ -126,7 +131,7 @@ class NewsPostController extends Controller
 
 $isUpdate =   NewsPost::where(['id'=>$request->id])->update([
     'category_id' => $request->category_id,
-    'subcategory_id' => $request->subcategory_id,
+    'subcategory_id' => $request->subcategory_id ?? '0',
     'user_id' => $request->user_id,
     'news_title' => $request->news_title,
     'news_title_slug' => strtolower(str_replace(' ','-',$request->news_title)),
@@ -151,9 +156,11 @@ foreach ($tags as $key => $value) {
     $tag = Tag::firstOrCreate(['name'=>trim($value)]);
     $tagIds[] = $tag->id;
 }
+
 $newsPost->tags()->sync($tagIds);
 // delete tags which news is associated with tag
-Tag::has('newsPost','=',0)->delete(); 
+         // Delete tags with no associations
+    // Tag::whereIn('id',$newsTags->id)->has('newsPost','=',0)->delete();
 
 // dd($isUpdate);
 if($isUpdate===1){
@@ -170,7 +177,7 @@ public function deleteNewsPost($id)
 {
     $newsPost = NewsPost::findOrFail($id);
     // dd($newsPost);
-    $$prev_tags_id = $newsPost->tags->pluck('id')->toArray();
+    $prev_tags_id = $newsPost->tags->pluck('id')->toArray();
 
     $imageUrl = $newsPost->image;
     $imageArr = explode('/',$imageUrl);
@@ -185,7 +192,8 @@ public function deleteNewsPost($id)
     
     if($newsPost->delete()){
     // Deleting the related tags with no tag is associated with deletable news 
-    Tag::whereId('id',$prev_tags_id)->has('newsPost','=',0)->delete();
+
+    Tag::whereIn('id',$prev_tags_id)->has('newsPost','=',0)->delete();
         $notification = [
             'message'=>'News Post Successfully Deleted',
             'alert-type'=> 'success'
