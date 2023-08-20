@@ -18,9 +18,9 @@ class ArchiveController extends Controller
 
     public function ArchiveDetails($month,$year)
     {
-        $newsPosts = NewsPost::with('subcategory')->whereMonth('created_at','=',$month)->whereYear('created_at','=',$year)->paginate(12);
+        $newsPosts = NewsPost::with('subcategory')->whereMonth('created_at','=',$month)->whereYear('created_at','=',$year)->simplePaginate(6);
         foreach ($newsPosts as $key => $value) {
-           $updated_date  = date('F M',strtotime($value->created_at));
+           $updated_date  = date('F, Y',strtotime($value->created_at));
         }
      return view('frontend.archive.archive',compact('newsPosts','updated_date'));
     }

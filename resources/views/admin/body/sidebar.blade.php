@@ -272,6 +272,25 @@
                 </div>
             </li>
 
+             <li>
+                <a href="#subsribers" data-bs-toggle="collapse">
+                    <i class="mdi mdi-email-multiple-outline"></i>
+                    <span>Subscribers</span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="subsribers">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ route('subsribers.all') }}">All Subscribers</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('mail.add') }}">Mail To Subscribers</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </li>
+
 
 
              <li>

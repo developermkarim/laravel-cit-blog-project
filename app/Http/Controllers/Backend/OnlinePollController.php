@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\OnlinePoll;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\ElseIf_;
 
 class OnlinePollController extends Controller
 {
@@ -109,7 +108,8 @@ class OnlinePollController extends Controller
             }elseif($request->result == 'no_opinion'){
                 $vote_data->no_opinion = $vote_data->no_opinion + 1;
             }
-            if ($vote_data->update()) {
+
+            $vote_data->update();
                 session()->put('current_poll_id',$vote_data->id);
                 $notification=[
                     'message'=>"you have $request->result votted successfully",
@@ -117,8 +117,16 @@ class OnlinePollController extends Controller
                 ];
 
                 return redirect()->back()->with($notification);
-            }
             
+            
+        }
+
+
+        public function VoteYesNoPreviousResult()
+        {
+           $allVotes = OnlinePoll::orderBy('id','DESC')->get();
+
+           return view('frontend.voting.all_votes',compact('allVotes'));
         }
         
         

@@ -11,9 +11,9 @@ class TagController extends Controller
 {
     public function getAllTags()
     {
-        $newsPost = NewsPost::find();
-        $allTags = Tag::all();
-        // dd($allTags)
+        $newsPost = NewsPost::find(1);
+        $allTags = $newsPost->tags; Tag::all();
+         dd($allTags);
 
     }
 }

@@ -157,9 +157,7 @@ class VideoGalleryController extends Controller
         );
         return redirect()->back()->with($notification); 
 
-
     }// End Method 
-
 
 /////////////////// Live TV Method ////////////////
     public function UpdateLiveTv(){
@@ -168,8 +166,6 @@ class VideoGalleryController extends Controller
         return view('backend.video.live_tv',compact('live'));
 
     }// End Method 
-
-
 
      public function UpdateLiveData(Request $request){
 
@@ -204,23 +200,7 @@ class VideoGalleryController extends Controller
         );
         return redirect()->back()->with($notification);
 
-         /* else{
-
-            LiveTv::findOrFail($live_id)->update([
-
-            'live_url' => $request->live_url,   
-            'post_date' => Carbon::now()->format('d F Y'), 
-
-        ]);
-
-         $notification = array(
-            'message' => 'Live Tv Update Without Image Successfully',
-            'alert-type' => 'success'
-
-        ); */
-        // return redirect()->back()->with($notification);
-
-        
+       
 
     }// End Method
 

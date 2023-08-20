@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Backend\SubscriberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\JustBannerController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Backend\VideoGalleryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\NewsCommentController as CommentController;
 use App\Http\Controllers\Frontend\NewsCommentController;
+use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -329,6 +332,24 @@ Route::controller(IndexController::class)->group(function(){
 
     Route::post('vote/store',[OnlinePollController::class,'VoteYesNoUpdateResult'])->name('vote.store');
 
+    Route::get('vote/previous',[OnlinePollController::class,'VoteYesNoPreviousResult'])->name('vote.previous');
+
+    Route::get('subscriber/all', [SubscriberController::class, 'show_all'])->name('subsribers.all');
+Route::get('subscriber/send-email', [SubscriberController::class, 'send_email'])->name('mail.add');
+Route::post('/admin/subscriber/send-email-submit', [SubscriberController::class, 'send_email_submit'])->name('mail.send');
+    
+    Route::controller(TagController::class)->group(function(){
+         // getAllTags
+    Route::get('/all/tags','getAllTags')->name('all.tags');
+
+    });
+
+    Route::controller(ArchiveController::class)->group(function(){
+        // getAllTags
+   Route::post('/archive/show','SelectArchive')->name('archive.show');
+   Route::get('/archive/{year}/{month}','ArchiveDetails')->name('archive.details');
+
+   });
 
 
 /*     Route::controller(NewsCommentController::class)->group(function(){

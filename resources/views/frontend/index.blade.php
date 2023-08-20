@@ -456,6 +456,7 @@
 
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
@@ -1210,6 +1211,7 @@
 		
 
 @php
+
     $online_polls = App\Models\OnlinePoll::orderBy('id','DESC')->first();
     $total_vote = $online_polls->yes + $online_polls->no + $online_polls->no_opinion;
 
@@ -1219,7 +1221,7 @@
 
    }else{
 
-    $yes_vote_percentage = ($yes_vote_percentage*100)/$total_vote;
+    $yes_vote_percentage = ($online_polls->yes*100)/$total_vote;
     $yes_vote_percentage = ceil($yes_vote_percentage);
 
    };
@@ -1227,16 +1229,17 @@
    if($online_polls->no =='0'){
     $no_vote_percentage = 0;
    }else{
-    $no_vote_percentage = (no_vote_percentage*100)/$total_vote;
+    $no_vote_percentage = ($online_polls->no*100)/$total_vote;
     $no_vote_percentage = ceil($no_vote_percentage);
    };
 
    if($online_polls->no_opinion=='0'){
     $no_opiniton_vote_percentage = 0;
    }else{
-    $no_opiniton_vote_percentage = (no_opiniton_vote_percentage*100)/$total_vote;
+    $no_opiniton_vote_percentage = ($online_polls->no_opinion*100)/$total_vote;
     $no_opiniton_vote_percentage = ceil($no_opiniton_vote_percentage);
-   }
+   };
+
 @endphp
 
 
@@ -1273,7 +1276,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <a href="{{ route('poll_previous') }}" class="btn btn-primary old" style="margin-top:0;">{{ "OLD_RESULTS" }}</a>
+                        <a href="{{ route('vote.previous') }}" class="btn btn-primary old" style="margin-top:0;">{{ "OLD_RESULTS" }}</a>
                     </div>
 
                 @endif
@@ -1284,13 +1287,13 @@
                         <form action="{{ route('vote.store') }}" method="post">
                                     @csrf
 
-                                    <input type="hidden" name="vote_id" value="{{ $vote->id }}">
+                                    <input type="hidden" name="vote_id" value="{{ $online_polls->id }}">
                                     
                                     <div class="">
                                        
                                         <img src="..." class="d-block w-100" alt="...">
 
-                                        <h2>{!! $vote->title !!}   </h2>
+                                        <h2>{!! $online_polls->title !!}   </h2>
 
                                         <div class="d-flex flex-wrap">
 
@@ -1320,16 +1323,16 @@
                         {{-- ONline Poll vote Here End --}}
 
                         @php
-                            $news_post_data = App\Models\NewsPost::where('id','DESC')->get();
+                            $news_post_data = App\Models\NewsPost::orderBy('id','DESC')->get();
 
                             $archive_arr=[];
-                        foreach ($news_post_data as $key => $value) {
+                        foreach ($news_post_data as $value) {
                             $string_time = strtotime($value->created_at);
                             $day = date('d',$string_time);
                             $month = date('m',$string_time);
                             $month_full = date('F',$string_time);
                             $year = date('Y',$string_time);
-                            $archive_arr[] = "$day-$month_full-$year";
+                            $archive_arr[] =  $month.'-'.$month_full.'-'.$year;
                         }
                         $archive_arr = array_values(array_unique($archive_arr));
                         @endphp
@@ -1345,16 +1348,16 @@
 							</div>
 
 							<div class="archive">
-								<form action="http://127.0.0.1:9999/archive/show" method="post">
+								<form action="{{ route('archive.show') }}" method="post">
                                     @csrf
 									
 									<select name="archive_month_year" class="form-select" onchange="this.form.submit()">
 										<option value="">Select Month</option>
 									
-                                            @for ($i=0; $i < count($archive_arr); $i++)
+                                            @for($i=0; $i < count($archive_arr); $i++)
                                                 
                                             @php
-                                                $date_arr = explode('-',$archive_arr[i]);
+                                                $date_arr = explode('-',$archive_arr[$i]);
                                             @endphp
                                       <option value="{{ $date_arr[0].'-'.$date_arr[2] }}">{{ $date_arr[1] }}, {{ $date_arr[2] }}</option>
                                         @endfor;
