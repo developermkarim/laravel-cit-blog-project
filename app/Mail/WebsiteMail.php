@@ -12,7 +12,7 @@ class WebsiteMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $subject, $body;
+    public $subject, $body;
     /**
      * Create a new message instance.
      *
@@ -44,7 +44,7 @@ class WebsiteMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.subsciber_mail_data',
+            view: 'backend.subscriber.email',
             with: [
                 'subject'=>$this->subject,
             ]

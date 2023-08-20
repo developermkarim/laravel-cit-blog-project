@@ -9,6 +9,9 @@
                         
                         <!-- start page title -->
                         <div class="row">
+
+                          
+
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
@@ -22,6 +25,14 @@
                             </div>
                         </div>     
                         <!-- end page title --> 
+
+                        @if (session('success'))
+                        <div class="alert alert-primary text-primary alert-dismissible fade show" role="alert">
+                          
+                            {{ session('success') }}
+                        </div>
+                          
+                        @endif
   
                         <!-- Form row -->
                         <div class="row">

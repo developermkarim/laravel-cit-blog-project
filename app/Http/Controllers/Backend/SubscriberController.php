@@ -38,6 +38,7 @@ class SubscriberController extends Controller
             // Mail::to($row->email)->send(new Websitemail($subject,$message));
         }
 
+
         return redirect()->back()->with('success', 'Email is sent successfully.');
     }
 }

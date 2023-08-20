@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function newsPost()
+    public function newsPost()  // User::with('newsPost')->get();
     {
         return $this->hasMany(NewsPost::class,'user_id','id');
     }

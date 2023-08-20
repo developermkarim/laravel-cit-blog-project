@@ -38,12 +38,12 @@
                                 </h5>
                                 <div class="date-user d-flex justify-between">
                                     <div class="user">
-                                          <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span>{{ $item->user->name }}</span>
+                                         
+                                    <span> <i class="fa fa-user" aria-hidden="true"></i>{{ $item->user->name }}</span>
                                     </div>
                                   <div class="date">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <span>{{ $item->updated_at->format('D-M-Y') }}</span>
+                                    
+                                    <span><i class="fa fa-calendar" aria-hidden="true"></i>{{ $item->updated_at->format('D-M-Y') }}</span>
                                   </div>
                                 </div>
                             </div>
