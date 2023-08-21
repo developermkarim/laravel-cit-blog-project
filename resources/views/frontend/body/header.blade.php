@@ -51,23 +51,22 @@
                     <button type="submit" value="Search"> <i class="las la-search"></i> </button>
                 </form>
             </div>
+          
             <div class="col-lg-4 col-md-4">
                 <div class="header-social">
-                    <ul>
-                        <li> <a href="https://www.facebook.com/" target="_blank" title="facebook"><i
-                                    class="lab la-facebook-f"></i> </a> </li>
-                        <li><a href="https://twitter.com/" target="_blank" title="twitter"><i class="lab la-twitter">
-                                </i> </a></li>
 
+                    <ul>
+                        <li> <a href="{{ route('user.faq') }}"> FAQ</a></li>
+                        <li><a href="{{ route('user.about') }}"> About</a></li>
+                        <li><a href="{{ route('user.contact') }}">Contact Us </a></li>
                         @auth
                         <li><a href="{{ route('user.logout') }}"><b> Logout </b></a> </li>
                         @else
                         <li><a href="{{ route('login') }}"><b> Login </b></a> </li>
                         <li> <a href="{{ route('register') }}"> <b>Register</b> </a> </li>
                         @endauth
-
-
                     </ul>
+
                 </div>
             </div>
         </div>

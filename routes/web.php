@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\PhotoGalleryController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SeoSettingController;
 use App\Http\Controllers\Backend\VideoGalleryController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\NewsCommentController as CommentController;
 use App\Http\Controllers\Frontend\NewsCommentController;
@@ -363,6 +364,30 @@ Route::controller(IndexController::class)->group(function(){
     Route::get('subscriber/verify/{token}/{email}','SubscriberVarify')->name('subscriber.verify');
    });
 
+
+
+   /* Common Pages Routes Here by admin */
+
+Route::controller(PageController::class)->group(function(){
+
+    Route::get('user/about','UserAboutPage')->name('user.about');
+    Route::get('user/contact','UserContactPage')->name('user.contact');
+    Route::get('user/faq','UserFaqPage')->name('user.faq');
+    Route::get('user/privacy','UserprivacyPage')->name('user.privacy');
+    Route::get('user/disclaimer','UserDisclaimerPage')->name('user.disclaimer');
+    Route::get('user/terms-and-condition','UserTermsPage')->name('user.terms-and-condition');
+    Route::get('user/policy','UserPlicyPage')->name('user.policy');
+
+   
+});
+
+/* Contacvt Data send to admin from user */
+Route::post('contact/previous',[ContactController::class,'StoreContactData'])->name('contact.form.submit');
+
+/* Route::get('contact/check',function(){
+    $admin =   App\Models\User::where(['status'=>1])->where(['role'=>'admin'])->get();
+   dd($admin);
+   }); */
 
    // subscriber/verify
 

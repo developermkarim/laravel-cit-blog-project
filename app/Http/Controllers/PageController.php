@@ -159,5 +159,50 @@ public function updateprivacyPage(Request $request)
 }
 
 
+/* Data Show For User , Methods Here */
+
+public function UserAboutPage()
+{
+    $about = Page::where(['about_status'=>'1'])->select('about_details','about_title')->first();
+    
+    return view('frontend.pages.about',compact('about'));
+}
+
+
+public function UserFaqPage()
+{
+    $faq = Page::where(['faq_status'=>'1'])->select('faq_details')->first();
+    //  dd($faq->faq_details);
+    return view('frontend.pages.faq',compact('faq'));
+}
+
+public function UserContactPage()
+{
+    $contact = Page::where(['contact_status'=>'1'])->select('contact_details','contact_title')->first();
+    
+    return view('frontend.pages.contact',compact('contact'));
+}
+
+public function UserPrivacyPage()
+{
+    $privacy = Page::where(['privacy_status'=>'1'])->select('privacy_details')->first();
+    
+    return view('frontend.pages.privacy',compact('privacy'));
+}
+
+public function UserTermsPage()
+{
+    $terms = Page::where(['terms_status'=>'1'])->select('terms_details')->first();
+    
+    return view('frontend.pages.terms',compact('terms'));
+}
+
+public function UserDisclaimerPage()
+{
+    $disclaimer = Page::where(['disclaimer_status'=>'1'])->select('disclaimer_details')->first();
+    
+    return view('frontend.pages.disclaimer',compact('disclaimer'));
+}
+
 
 }
