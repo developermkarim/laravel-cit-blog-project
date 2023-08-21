@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\SubscriberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\JustBannerController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Frontend\NewsCommentController;
 use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Backend\SocialItemController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -314,6 +316,33 @@ Route::post('/admin/subscriber/send-email-submit', 'send_email_submit')->name('m
 
 });
 
+/* SOcial Item Controlled by admin */
+Route::controller(SocialItemController::class)->group(function(){
+Route::get('/social-item/show', 'show' )->name('admin_social_item_show') ;
+Route::get('/social-item/create', 'create' )->name('admin_social_item_create') ;
+Route::post('/social-item/store', 'store' )->name('admin_social_item_store');
+Route::get('/social-item/edit/{id}', 'edit' )->name('admin_social_item_edit') ;
+Route::post('/social-item/update/{id}', 'update' )->name('admin_social_item_update');
+Route::get('/social-item/delete/{id}', 'delete' )->name('admin_social_item_delete') ;
+});
+
+/* advertisement Controlled by admin */
+Route::controller(AdvertisementController::class)->group(function(){
+    Route::get('/admin/home-advertisement',  'home_ad_show')->name('admin_home_ad_show');
+    Route::post('/admin/home-advertisement-update',  'home_ad_update' )->name('admin_home_ad_update');
+
+    Route::get('/admin/top-advertisement',  'top_ad_show' )->name('admin_top_ad_show');
+    Route::post('/admin/top-advertisement-update',  'top_ad_update' )->name('admin_top_ad_update');
+    
+    Route::get('/admin/sidebar-advertisement-view',  'sidebar_ad_show' )->name('admin_sidebar_ad_show');
+    Route::get('/admin/sidebar-advertisement-create',  'sidebar_ad_create' )->name('admin_sidebar_ad_create');
+    Route::post('/admin/sidebar-advertisement-store',  'sidebar_ad_store' )->name('admin_sidebar_ad_store');
+    
+    Route::get('/admin/sidebar-advertisement-edit/{id}',  'sidebar_ad_edit' )->name('admin_sidebar_ad_edit');
+    Route::post('/admin/sidebar-advertisement-update/{id}',  'sidebar_ad_update' )->name('admin_sidebar_ad_update');
+    
+    Route::get('/admin/sidebar-advertisement-delete/{id}',  'sidebar_ad_delete' )->name('admin_sidebar_ad_delete');
+});
 
 }); // This end is of admin role middleware
 

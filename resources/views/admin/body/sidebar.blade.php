@@ -118,12 +118,12 @@
 
     
     <li>
-        <a href="#newssidebarAuth" data-bs-toggle="collapse">
-            <i class="mdi mdi-account-circle-outline"></i>
+        <a href="#page-setting" data-bs-toggle="collapse">
+        <i class="mdi mdi-account-circle-outline"></i>
             <span> Page Settings  </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="newssidebarAuth">
+        <div class="collapse" id="page-setting">
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('page.about') }}">About</a>
@@ -324,9 +324,44 @@
             </li>
 
 
+            
+            <li>
+                <a href="#advertisement" data-bs-toggle="collapse">
+                    <i class="mdi mdi-email-multiple-outline"></i>
+                    <span> All Advertisements </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="advertisement">
+                    <ul class="nav-second-level">
+                        
+                       
+                        <li>
+                            <a href="{{ route('admin_top_ad_show') }}"> Top Advertisement </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('admin_home_ad_show') }}"> Home Advertisement </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('admin_sidebar_ad_show') }}">Sidebar Advertisement</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </li>
+
 
      <li>
         <a href="{{ route('all.poll') }}">
+             <i class="mdi mdi-view-dashboard-outline"></i>
+            <span> Online Poll </span>
+        </a>
+    </li>
+
+     <li>
+        <a href="{{ route('admin_social_item_show') }}">
              <i class="mdi mdi-view-dashboard-outline"></i>
             <span> Online Poll </span>
         </a>
