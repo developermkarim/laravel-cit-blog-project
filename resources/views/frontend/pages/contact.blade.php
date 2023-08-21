@@ -1,6 +1,13 @@
 @extends('frontend.home_dashboard')
 @section('home')
 
+<style>
+	#map {
+		height: 400px;
+		width: 100%;
+	}
+</style>
+
 @section('title','FAQ')
 
 <div class="page-top">
@@ -51,15 +58,16 @@
                 </form>
             </div>
             <div class="col-lg-6 col-md-12">
-                <div class="map">
-                    {!! $contact->contact_map !!}
-                </div>
+               
+                <div id="map"></div>
+             
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script>
 (function($){
     $('.form_contact_ajax').on('submit',function(e){
@@ -96,5 +104,25 @@
     })
 })(jQuery)
 </script>
+
 <div id="loader"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" async defer></script>
+
+    <script>
+        function initMap() {
+            var myLatLng = { lat: -34.397, lng: 150.644 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: myLatLng,
+                zoom: 8
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+        
+    </script>
+
 @endsection
