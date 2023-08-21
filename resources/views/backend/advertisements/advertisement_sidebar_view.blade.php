@@ -7,21 +7,23 @@
     <!-- Start Content-->
     <div class="container-fluid">
 
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box">
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            
-                                            <li class="breadcrumb-item active">Home Advertisements</li>
-                                        </ol>
-                                    </div>
-                                    <h4 class="page-title">Add Home Advertisements</h4>
+                       <!-- start page title -->
+                       <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <a href="{{ route('admin_sidebar_ad_create') }}" class="btn btn-blue waves-effect waves-light">Add Sidebar Advertisements</a>
+                                    </ol>
                                 </div>
+                                <h4 class="page-title">Sidebar Advertisements </h4>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                    </div>     
+
+
+                      <!-- start page title -->
 
 
     <div class="row">
@@ -50,7 +52,7 @@
                                     <td>{{ $row->sidebar_ad_location }}</td>
                                     <td class="pt_10 pb_10">
                                         <a href="{{ route('admin_sidebar_ad_edit',$row->id) }}" class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('admin_sidebar_ad_delete',$row->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>
+                                        <a href="{{ route('admin_sidebar_ad_delete',$row->id) }}" id="DeleteBtn" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

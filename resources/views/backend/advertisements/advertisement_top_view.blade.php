@@ -13,10 +13,10 @@
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             
-                                            <li class="breadcrumb-item active">Home Advertisements</li>
+                                            <li class="breadcrumb-item active">Top Advertisements</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Add Home Advertisements</h4>
+                                    <h4 class="page-title">Add Top Advertisements</h4>
                                 </div>
                             </div>
                         </div>     

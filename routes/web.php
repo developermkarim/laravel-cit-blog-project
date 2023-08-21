@@ -115,7 +115,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
         Route::get('/delete/admin/{id}','deleteAdmin')->name('delete.admin');
 
-        Route::get('admin/{status}/{id}','activeInactive')->name('status.admin');
+         Route::get('admin/{status}/{id}','activeInactive')->name('status.admin');
 
         Route::post('admin/data/activate/{id}', 'activate')->name('admin.data.activate');
         Route::post('admin/data/deactivate/{id}', 'deactivate')->name('admin.data.deactivate');
@@ -338,7 +338,7 @@ Route::controller(AdvertisementController::class)->group(function(){
     Route::get('/admin/sidebar-advertisement-create',  'sidebar_ad_create' )->name('admin_sidebar_ad_create');
     Route::post('/admin/sidebar-advertisement-store',  'sidebar_ad_store' )->name('admin_sidebar_ad_store');
     
-    Route::get('/admin/sidebar-advertisement-edit/{id}',  'sidebar_ad_edit' )->name('admin_sidebar_ad_edit');
+    Route::get('/admin/sidebar/advertisement-edit/{id}',  'sidebar_ad_edit' )->name('admin_sidebar_ad_edit');
     Route::post('/admin/sidebar-advertisement-update/{id}',  'sidebar_ad_update' )->name('admin_sidebar_ad_update');
     
     Route::get('/admin/sidebar-advertisement-delete/{id}',  'sidebar_ad_delete' )->name('admin_sidebar_ad_delete');

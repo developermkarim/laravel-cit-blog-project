@@ -243,29 +243,14 @@ class AdminController extends Controller
         }elseif($status == 'inactive'){
             $action = User::where('id',$id)->update(['status'=>'active']);
         }
-        if($action){
+        
             $notification = [
                 'message'=>'Status Changed Successfully',
                 'alert-type'=>'info',
             ];
             return redirect('all/admin')->with($notification);
-        }
+        
     }
-
-   /*  public function deactivate($id)
-    {
-        $data = User::findOrFail($id);
-       $data->status = 'inactive';
-       return response()->json(['success'=>'User Status changed deactivated','alert-type'=>'success','status'=>$data->status]);
-
-    }
-    public function activate($id)
-    {
-        $data = User::findOrFail($id);
-       $data->status = 'active';
-       $data->save();
-        return response()->json(['success'=>'User Status changed activated','alert-type'=>'success','status'=>$data->status]);
-       } */
 
 
     }

@@ -15,6 +15,8 @@
         <!-- Plugins css -->
         <link href="{{ asset('backend/assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('backend/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" id="common-themesbazar-css" href="{{ asset('frontend/assets/css/iziToast.min.css') }}" media="all">
         
         <!-- Bootstrap css -->
         <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -134,6 +136,7 @@ tinymce.init({
 <script src="{{ asset('backend/assets/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
 <script src="{{ asset('backend/assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
 <script src="{{ asset('backend/assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+<script src="{{ asset('frontend/assets/js/iziToast.min.js') }}" id="newsflash-main-js"></script>
 <!-- third party js ends -->
 
 <!-- Datatables init -->
@@ -198,6 +201,38 @@ $(document).on('click','#DeleteBtn',function(e){
   });
 });
 </script>
+
+@if($errors->any())
+    @foreach($errors->all() as $error)
+        <script>
+            iziToast.error({
+                title: '',
+                position: 'topRight',
+                message: '{{ $error }}',
+            });
+        </script>
+    @endforeach
+@endif
+
+@if(session()->get('error'))
+    <script>
+        iziToast.error({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get('error') }}',
+        });
+    </script>
+@endif
+
+@if(session()->get('success'))
+    <script>
+        iziToast.success({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get('success') }}',
+        });
+    </script>
+@endif
         
  <!-- InputTags js-->
  <script src="{{ asset('backend/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>

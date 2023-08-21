@@ -1,4 +1,3 @@
-
 @extends('admin.admin_dashboard')
 @section('admin') 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -12,17 +11,19 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
+
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            
-                                            <li class="breadcrumb-item active">Home Advertisements</li>
+                                            <a href="{{ route('admin_sidebar_ad_create') }}" class="btn btn-blue waves-effect waves-light">Add Sidebar Advertisements</a>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Add Home Advertisements</h4>
+                                    <h4 class="page-title">Sidebar Advertisements </h4>
                                 </div>
                             </div>
                         </div>     
-                        <!-- end page title --> 
+
+
+                          <!-- start page title -->
 
 
     <form action="{{ route('admin_sidebar_ad_update',$sidebar_ad_data->id) }}" method="post" enctype="multipart/form-data">
