@@ -1,13 +1,26 @@
-@extends('admin.layout.app')
+@extends('admin.admin_dashboard')
+@section('admin') 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div class="content">
 
-@section('heading', 'Social Items')
+    <!-- Start Content-->
+    <div class="container-fluid">
 
-@section('button')
-<a href="{{ route('admin_social_item_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
-@endsection
-
-@section('main_content')
-<div class="section-body">
+                                            <!-- start page title -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="page-title-box">
+                        
+                                                        <div class="page-title-right">
+                                                            <ol class="breadcrumb m-0">
+                                                                <a href="{{ route('admin_social_item_create') }}" class="btn btn-blue waves-effect waves-light">Add Social Item</a>
+                                                            </ol>
+                                                        </div>
+                                                        <h4 class="page-title">Social Items </h4>
+                                                    </div>
+                                                </div>
+                                            </div>     
+                                              <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -45,5 +58,7 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 @endsection

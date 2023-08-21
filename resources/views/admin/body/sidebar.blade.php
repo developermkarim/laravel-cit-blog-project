@@ -363,7 +363,7 @@
      <li>
         <a href="{{ route('admin_social_item_show') }}">
              <i class="mdi mdi-view-dashboard-outline"></i>
-            <span> Online Poll </span>
+            <span> Social Item Show </span>
         </a>
     </li>
 

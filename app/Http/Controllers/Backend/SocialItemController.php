@@ -12,12 +12,12 @@ class SocialItemController extends Controller
     public function show()
     {
         $social_item_data = SocialItem::get();
-        return view('admin.social_item_show', compact('social_item_data'));
+        return view('backend.social-items.social_item_show', compact('social_item_data'));
     }
 
     public function create()
     {
-        return view('admin.social_item_create');
+        return view('backend.social-items.social_item_create');
     }
 
     public function store(Request $request)
@@ -38,7 +38,7 @@ class SocialItemController extends Controller
     public function edit($id)
     {
         $social_item_data = SocialItem::where('id',$id)->first();
-        return view('admin.social_item_edit', compact('social_item_data'));
+        return view('backend.social-items.social_item_edit', compact('social_item_data'));
     }
 
     public function update(Request $request,$id) 

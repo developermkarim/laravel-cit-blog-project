@@ -7,21 +7,21 @@
                     <!-- Start Content-->
                     <div class="container-fluid">
                         
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box">
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            
-                                            <li class="breadcrumb-item active">Update Banner </li>
-                                        </ol>
-                                    </div>
-                                    <h4 class="page-title">Update Banner</h4>
-                                </div>
-                            </div>
-                        </div>     
-                        <!-- end page title --> 
+                                            <!-- start page title -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="page-title-box">
+                        
+                                                        <div class="page-title-right">
+                                                            <ol class="breadcrumb m-0">
+                                                                <a href="{{ route('admin_social_item_show') }}" class="btn btn-blue waves-effect waves-light">Show Social Item</a>
+                                                            </ol>
+                                                        </div>
+                                                        <h4 class="page-title">Social Items </h4>
+                                                    </div>
+                                                </div>
+                                            </div>     
+                                              <!-- start page title -->
 
 
         <div class="row">

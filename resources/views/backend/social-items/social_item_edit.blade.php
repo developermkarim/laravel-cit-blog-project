@@ -1,13 +1,27 @@
-@extends('admin.layout.app')
+@extends('admin.admin_dashboard')
+@section('admin') 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div class="content">
 
-@section('heading', 'Edit Social Item')
+    <!-- Start Content-->
+    <div class="container-fluid">
 
-@section('button')
-<a href="{{ route('admin_social_item_show') }}" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
-@endsection
+                      <!-- start page title -->
+                      <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
 
-@section('main_content')
-<div class="section-body">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <a href="{{ route('admin_social_item_create') }}" class="btn btn-blue waves-effect waves-light">Add Social Item</a>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">Social Items </h4>
+                            </div>
+                        </div>
+                    </div>     
+                      <!-- start page title -->
+
     <form action="{{ route('admin_social_item_update',$social_item_data->id) }}" method="post">
         @csrf
         <div class="row">
@@ -37,5 +51,7 @@
             <button type="submit" class="btn btn-primary">Update</button>
         </div>
     </form>
+</div>
+</div>
 </div>
 @endsection
