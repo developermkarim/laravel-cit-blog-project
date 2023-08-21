@@ -306,6 +306,14 @@ Route::controller(OnlinePollController::class)->group(function(){
     
 });
 
+Route::controller(SubscriberController::class)->group(function(){
+Route::get('subscriber/all', 'show_all')->name('subsribers.all');
+Route::get('subscriber/send-email', 'send_email')->name('mail.add');
+Route::post('/admin/subscriber/send-email-submit', 'send_email_submit')->name('mail.send');
+
+});
+
+
 }); // This end is of admin role middleware
 
 
@@ -334,9 +342,7 @@ Route::controller(IndexController::class)->group(function(){
 
     Route::get('vote/previous',[OnlinePollController::class,'VoteYesNoPreviousResult'])->name('vote.previous');
 
-    Route::get('subscriber/all', [SubscriberController::class, 'show_all'])->name('subsribers.all');
-Route::get('subscriber/send-email', [SubscriberController::class, 'send_email'])->name('mail.add');
-Route::post('/admin/subscriber/send-email-submit', [SubscriberController::class, 'send_email_submit'])->name('mail.send');
+
     
     Route::controller(TagController::class)->group(function(){
          // getAllTags
@@ -351,6 +357,14 @@ Route::post('/admin/subscriber/send-email-submit', [SubscriberController::class,
 
    });
 
+   Route::controller(SubscriberController::class)->group(function(){
+
+    Route::post('send/verify/','SendVarify')->name('subscriber.verify.post');
+    Route::get('subscriber/verify/{token}/{email}','SubscriberVarify')->name('subscriber.verify');
+   });
+
+
+   // subscriber/verify
 
 /*     Route::controller(NewsCommentController::class)->group(function(){
 

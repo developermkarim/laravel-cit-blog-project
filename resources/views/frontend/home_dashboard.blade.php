@@ -42,11 +42,13 @@ img.emoji {
 	background: none !important;
 	padding: 0 !important;
 }
+
 </style>
 <link rel="stylesheet" id="wp-block-library-css" href="{{ asset('frontend/assets/css/style.min.css') }}" media="all"> 
 <link rel="stylesheet" id="contact-form-7-css" href="{{ asset('frontend/assets/css/styles.css') }}" media="all">
 <link rel="stylesheet" id="newsflash-style-css" href="{{ asset('frontend/assets/css/style.css') }}" media="all">
 <link rel="stylesheet" id="common-themesbazar-css" href="{{ asset('frontend/assets/css/common-themesbazar.css') }}" media="all">
+<link rel="stylesheet" id="common-themesbazar-css" href="{{ asset('frontend/assets/css/iziToast.min.css') }}" media="all">
 <link rel="stylesheet" id="newsflash-lineawesome-css" href="{{ asset('frontend/assets/css/line-awesome.min.css') }}" media="all">
 <link rel="stylesheet" id="newsflash-stellarnav-css" href="{{ asset('frontend/assets/css/stellarnav.css') }}" media="all">
 <link rel="stylesheet" id="newsflash-jquery-css" href="{{ asset('frontend/assets/css/jquery-ui.css') }}" media="all">
@@ -91,6 +93,7 @@ img.emoji {
 <script src="{{ asset('frontend/assets/js/jquery.magnific-popup.min.js') }}" id="newsflash-magnific-js"></script>
 <script src="{{ asset('frontend/assets/js/jquery-ui.js') }}" id="newsflash-jqueryui-js"></script>
 <script src="{{ asset('frontend/assets/js/lazyload.min.js') }}" id="newsflash-lazyload-js"></script>
+<script src="{{ asset('frontend/assets/js/iziToast.min.js') }}" id="newsflash-main-js"></script>
 <script src="{{ asset('frontend/assets/js/main.js') }}" id="newsflash-main-js"></script>
 
 <script src="https://kit.fontawesome.com/97ff43f8ef.js" crossorigin="anonymous"></script>

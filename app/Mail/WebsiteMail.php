@@ -32,7 +32,7 @@ class WebsiteMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Website Mail',
+            subject: $this->subject,
         );
     }
 
@@ -45,9 +45,7 @@ class WebsiteMail extends Mailable
     {
         return new Content(
             view: 'backend.subscriber.email',
-            with: [
-                'subject'=>$this->subject,
-            ]
+            
         );
     }
 

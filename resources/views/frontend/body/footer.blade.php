@@ -1,60 +1,141 @@
-<footer class="footer-area">
-<div class="container">
-<div class="footer-menu">
-<div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="menu"><li id="menu-item-550" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-550"><a href=" ">ABOUT ALL</a></li>
-<li id="menu-item-551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-551"><a href=" ">COMPANY</a></li>
-<li id="menu-item-552" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-552"><a href=" ">ABOUT US</a></li>
-<li id="menu-item-553" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-553"><a href=" ">PHOTO GALLERY</a></li>
-<li id="menu-item-554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-554"><a href=" ">VIDOE GALLERY</a></li>
-<li id="menu-item-555" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-555"><a href=" ">SUPPORT</a></li>
-<li id="menu-item-556" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-556"><a href=" ">CONTACT</a></li>
-<li id="menu-item-557" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-557"><a href=" ">REGISTER</a></li>
-<li id="menu-item-558" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-558"><a href=" ">SEND NEWS </a></li>
-</ul></div> </div>
-<div class="footerColor">
-<div class="row">
-<div class="col-lg-5 col-md-5">
-<h3 class="footer-title">
-OFFICE : </h3>
-<div class="footer-content">
-<p style="text-align: left;">Ga-130/A Pragati Sarani, Middle Badda </p>
-<p style="text-align: left;">EMAIL : support@easylearningbd.com</p>
-<p style="text-align: left;">MOBILE : 4334343434</p> </div>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="item">
+                    <h2 class="heading">About Us</h2>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="item">
+                    <h2 class="heading">Useful Links</h2>
+                    <ul class="useful-links">
+                        <li><a href="http://127.0.0.1:8989">Home</a></li>
+
+                        <li><a href="http://127.0.0.1:8989/terms-and-conditions">Terms and Conditions</a></li>
+
+                        <li><a href="http://127.0.0.1:8989/privacy-policy">Privacy Policy</a></li>
+
+                        <li><a href="http://127.0.0.1:8989/disclaimer">Disclaimer</a></li>
+
+                        <li><a href="http://127.0.0.1:8989/contact">Contact Us</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="item">
+                    <h2 class="heading">Contact</h2>
+                    <div class="list-item">
+                        <div class="left">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="right">
+                            34 Antiger Lane, PK Lane, USA, 12937
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="left">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <div class="right">
+                            contact@arefindev.com
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="left">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="right">
+                            122-222-1212
+                        </div>
+                    </div>
+                    <ul class="social">
+                        <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li><a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                        <li><a href="https://www.pinterest.com" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+                        <li><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="item">
+                    <h2 class="heading">Newsletter</h2>
+                    <p>
+                        In order to get the latest news and other great items, please subscribe us here:
+                    </p>
+                    <form action="{{ route('subscriber.verify.post') }}" method="post" class="form_subscribe_ajax">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" name="email" class="form-control" placeholder="Email Address">
+                            <span class="text-danger error-text email_error"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Subscribe Now">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 </div>
-<div class="col-lg-7 col-md-7">
-<div class="row">
-<div class="col-lg-6 col-md-6">
-<h3 class="footer-title">
-DEMO TEXT </h3>
-<div class="footer-content">
-<p style="text-align: left;">DEMO TEXT : DEMO TEXT</p>
-<p style="text-align: left;">DEMO TEXT : DEMO TEXT</p>
-<p style="text-align: left;">DEMO TEXT : DEMO TEXT</p> </div>
+<div class="copyright">
+    Copyright 2022, ArefinDev. All Rights Reserved.
 </div>
-<div class="col-lg-6 col-md-6">
-<h3 class="footer-title">
-DEMO TEXT </h3>
-<div class="footer-content">
-<p style="text-align: left;">DEMO TEXT : DEMO TEXT</p>
-<p style="text-align: left;">DEMO TEXT :DEMO TEXT</p>
-<p style="text-align: left;">DEMO TEXT : DEMO TEXT</p> </div>
-</div>
-</div>
-</div>
-</div>
-<div class="copy_right_section">
-<div class="row">
-<div class="col-lg-6 col-md-6">
-<div class="copy-right">
-© All rights reserved © EasyNews </div>
-</div>
-<div class="col-lg-6 col-md-6">
-<div class="design-developed">
-Theme Developed BY <a href=" " target="_blank">easylearningbd.Com</a> </div>
-</div>
-</div>
-</div>
-</div>
-<a href=" " class="scrollToTop" style=""><i class="las la-long-arrow-alt-up"></i></a>
-</div>
-</footer>
+<div id="loader"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    (function($){
+        $(".form_subscribe_ajax").on('submit', function(e){
+            e.preventDefault();
+            $('#loader').show();
+            var form = this;
+            $.ajax({
+                url:$(form).attr('action'),
+                method:$(form).attr('method'),
+                data:new FormData(form),
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                beforeSend:function(){
+                    $(form).find('span.error-text').text('');
+                },
+                success:function(data)
+                {
+                    $('#loader').hide();
+                    if(data.code == 0)
+                    {
+                        $.each(data.error_message, function(prefix, val) {
+                            $(form).find('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }
+                    else if(data.code == 1)
+                    {
+                        $(form)[0].reset();
+                        iziToast.success({
+                            title: '',
+                            position: 'topRight',
+                            message: data.success_message,
+                        });
+                    }
+                    
+                }
+            });
+        });
+    })(jQuery);
+</script>
