@@ -206,7 +206,7 @@
         data:{category_id:category_id},
         dataType:"json",
         success:(response)=>{
-            let option = `<option value='0'>Select Category</option>`;
+            let option = `<option value='0'>Select Sub Category</option>`;
             $.each(response, function(key,value){
                 option+= `<option value="${value.id}">${value.subcategory_name}</option>`
             })

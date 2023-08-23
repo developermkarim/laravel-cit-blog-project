@@ -167,7 +167,7 @@ class CategoryController extends Controller
         Subcategory::findOrFail($id)->delete();
 
          $notification = array(
-            'message' => 'SubCategory Deleted Successfully',
+            'message' => 'SubCategory Deleted Successfully',  
             'alert-type' => 'success'
 
         );

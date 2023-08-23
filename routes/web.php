@@ -363,8 +363,18 @@ Route::controller(IndexController::class)->group(function(){
     /* Reporter Wise Post Route */
     Route::get('/reporter/news/{id}','reporterWiseNews')->name('reporter.news.post');
 
+
+    /* Sub category based on Category with ajax */
+
+    Route::get('/user/subcategory/ajax/{category_id}','GetSubCategory')->name('user-get-subcategory');
+
+    Route::post('/news/search','GetNewsBySeach')->name('news.search');
+
+
+    Route::get('/news-videos-photos/tags/{tagName}','TagNewsVideosPhotos')->name('news.videos.photos.tags');
     });
 
+ 
 
     Route::post('store/review/',[NewsCommentController::class,'storeReview'])->name('store.review');
 

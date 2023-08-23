@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\Subcategory;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class indexController extends Controller
@@ -97,5 +99,51 @@ class indexController extends Controller
 
         $news = NewsPost::where(['user_id'=>$id])->get();
         return view('backend.reporter.reporter_news_post',compact('reporter','news'));
+    }
+
+
+    public function GetSubCategory($category_id){
+
+        /*    $subcat = Subcategory::where('category_id',$category_id)->orderBy('subcategory_name','ASC')->get(); */
+        $subcat = Subcategory::where('category_id',$category_id)->orderBy('subcategory_name','ASC')->get();
+        return json_encode($subcat);
+   
+       }// End Mehtod 
+
+    /* Index Page Category Wise Subcategory for select combo box */
+
+    public function GetNewsBySeach(Request $request)
+    {
+       
+  /*       $newsPosts = NewsPost::where(['category_id'=>1])->orWhere(['subcategory_id'=>1])->where('news_title','LIKE',"%$request->search_key%")->get(); */
+        $newsPosts = NewsPost::with('subcategory')->orderBy('id','DESC');
+        if($request->text_item!=''){
+            $newsPosts = $newsPosts->where('news_title','LIKE','%'.$request->text_item.'%');
+        }
+        if($request->subcategory_id!=''){
+            $newsPosts = $newsPosts->where('subcategory_id',$request->subcategory_id);
+        }
+if($request->category_id!=''){
+    $newsPosts = $newsPosts->whereHas('subcategory.category',function($query) use ($request){
+        $query->where('category_id',$request->category_id);
+    });
+}
+        $newsPosts = $newsPosts->paginate(12);
+        //  dd($newsPosts);
+        return view('frontend.search.search',compact('newsPosts'));
+        
+    }
+
+    /* Tag Wise all News Videos and Photos */
+    public function TagNewsVideosPhotos($tagName)
+    {
+        // $tags = Tag::with('newsPost','videoGallery','photoGallery')->where('name',$tagName)->get();
+       
+        $tag = Tag::where('name',$tagName)->firstOrFail();
+        // dd($tag->photoGallary);
+        $tagVideos = $tag->videoGallary()->with('tags')->get();
+        $tagPhotos = $tag->photoGallary()->with('tags')->get();
+        $tagNews = $tag->newsPost()->with('tags')->get();
+        return view('frontend.tag.tag-wise-news-video-photo',compact('tagVideos','tagPhotos','tagNews'));
     }
 }
