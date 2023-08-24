@@ -80,7 +80,7 @@
                     
                 
                 @foreach($news->tags as $tag)
-                <a href="{{ url("/news-videos-photos/tags/$tag->name") }}" rel="tag">   {{ $tag->name }}
+                <a href="{{ url("/news-videos-photos/tags/$tag->name") }}" rel="tag">{{ $tag->name }}
                 </a>
                 @endforeach
                 @else

@@ -80,7 +80,7 @@ img.emoji {
 
 <div class="main_website">
 
-	
+	@include('frontend.cookie-popup');
 
 @include('frontend.body.header')
 @include('frontend.body.breaking_news')
