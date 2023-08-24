@@ -1,10 +1,16 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<style>
+.header-social ul li a{
+    font-size: 15px;
+}
+</style>
+
 <header class="themesbazar_header">
     <div class="container">
         <div class="row">
-          <div class="col-lg-5 col-md-5">
+          <div class="col-lg-4 col-md-4">
 
             <div class="row">
                 <div class="col-md-6">
@@ -52,7 +58,7 @@
                 </form>
             </div>
           
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-5 col-md-5">
                 <div class="header-social">
 
                     <ul>
@@ -82,6 +88,7 @@
                         </a>
                     </div>
                 </div>
+                
                 <div class="col-lg-8 col-md-8">
                     <div class="banner">
                         <a href=" " target="_blank">
@@ -89,6 +96,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

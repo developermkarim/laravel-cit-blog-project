@@ -22,6 +22,7 @@ use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\SocialItemController;
+use App\Http\Controllers\Frontend\SocialiteAuthController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -206,7 +207,7 @@ Route::controller(VideoGalleryController::class)->group(function(){
      Route::post('/update/video/gallery','UpdateVideoGallery')->name('update.video.gallery');
 
      Route::get('/delete/video/gallery/{id}','DeleteVideoGallery')->name('delete.video.gallery');
-     
+
      Route::get('/update/live/tv','UpdateLiveTv')->name('update.live.tv');
      Route::post('/update/live','UpdateLiveData')->name('update.live');
 
@@ -408,6 +409,8 @@ Route::controller(IndexController::class)->group(function(){
 
    /* Common Pages Routes Here by admin */
 
+
+
 Route::controller(PageController::class)->group(function(){
 
     Route::get('user/about','UserAboutPage')->name('user.about');
@@ -419,11 +422,18 @@ Route::controller(PageController::class)->group(function(){
     Route::get('user/policy','UserPlicyPage')->name('user.policy');
 
    
+
 });
 
 /* Contacvt Data send to admin from user */
 Route::post('contact/previous',[ContactController::class,'StoreContactData'])->name('contact.form.submit');
 
+
+Route::controller(SocialiteAuthController::class)->group(function(){
+
+    Route::get('/login/github/', 'redirectToGithub');
+    Route::get('/login/github/callback/','handleGithubCallback');
+});
 /* Route::get('contact/check',function(){
     $admin =   App\Models\User::where(['status'=>1])->where(['role'=>'admin'])->get();
    dd($admin);
