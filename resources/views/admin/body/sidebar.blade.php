@@ -225,7 +225,7 @@
                 <div class="collapse" id="live">
                     <ul class="nav-second-level">
                         <li>
-                            <a href="{{ route('update.live.tv') }}">Update Live TV</a>
+                            <a href="{{ url('/update/live/tv') }}">Update Live TV</a>
                         </li>
                         
                     </ul>

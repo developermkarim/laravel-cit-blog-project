@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('live_tvs', function (Blueprint $table) {
             $table->id();
             $table->string('live_image')->nullable();
-            $table->string('live_url')->nullable();
+            $table->text('live_url')->nullable();
             $table->string('post_date')->nullable();
             $table->timestamps();
         });

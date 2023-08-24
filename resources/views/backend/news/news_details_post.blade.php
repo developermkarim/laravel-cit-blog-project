@@ -76,11 +76,16 @@
             </div>
             <div class="singlePage2-tag">
                 <span> Tags : </span>
-
-                @foreach($tags_all as $tag)
-                <a href=" " rel="tag">                    {{GoogleTranslate::trans(ucwords($tag) , app()->getLocale())  }}
+                @if (is_array($news->tags) || is_object($news->tags))
+                    
+                
+                @foreach($news->tags as $tag)
+                <a href="{{ url("/news-videos-photos/tags/$tag->name") }}" rel="tag">   {{ $tag->name }}
                 </a>
                 @endforeach
+                @else
+                <p>No tags found.</p>
+                @endif
             </div>
 
             <div class="single-add">
@@ -225,7 +230,7 @@
             </form>
 
 
-
+            <div class="fb-comments" data-href="https://www.facebook.com/DailyProthomAlo" data-width="" data-numposts="5"></div>
 
             <div class="single_relatedCat">
                 <a href=" ">Related News </a>
@@ -241,13 +246,13 @@
                         </div>
                         <h4 class="related-title">
                             <a href="{{ url("/news/post/details/$item->id/$item->news_title_slug")  }}">
-                                {{GoogleTranslate::trans($news->news_title , app()->getLocale())  }}
+                                {{GoogleTranslate::trans($item->news_title , app()->getLocale())  }}
 
                             </a>
                         </h4>
                         <div class="related-meta">
                             <a href=" "><i class="la la-tags"> </i>
-                                {{ $news->created_at->format('l M d Y') }}
+                                {{ $item->created_at->format('l M d Y') }}
                             </a>
                         </div>
                     </div>

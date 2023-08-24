@@ -206,6 +206,7 @@ Route::controller(VideoGalleryController::class)->group(function(){
      Route::post('/update/video/gallery','UpdateVideoGallery')->name('update.video.gallery');
 
      Route::get('/delete/video/gallery/{id}','DeleteVideoGallery')->name('delete.video.gallery');
+     
      Route::get('/update/live/tv','UpdateLiveTv')->name('update.live.tv');
      Route::post('/update/live','UpdateLiveData')->name('update.live');
 
@@ -351,7 +352,7 @@ Route::controller(AdvertisementController::class)->group(function(){
 
 Route::controller(IndexController::class)->group(function(){
     
-    Route::get('/news/post/details/{id}/{slug}', 'newsDetails');
+    Route::get('/news/post/details/{id}/{slug}', 'newsDetails')->name('news.details');
     
     Route::get('/news/category/{id}/{slug}','cateWiseNews')->name('news.post.category');
     Route::get('/news/subcategory/{id}/{slug}','subcateWiseNews')->name('news.post.subcategory');

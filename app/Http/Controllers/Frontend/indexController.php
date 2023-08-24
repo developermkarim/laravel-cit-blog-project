@@ -41,8 +41,9 @@ class indexController extends Controller
     {
         $news = NewsPost::findOrFail($id);
 
-        $tags = $news->tags;
-        $tags_all = explode(',',$tags);
+        // $tags = $news->tags;
+        // $tags_all = explode(',',$tags);
+        // dd($tags);
         $news_key = 'blog' . $news->id;
         if(!Session::has($news_key)){
             $news->increment('view_count');
@@ -53,7 +54,7 @@ class indexController extends Controller
         $popular_posts = NewsPost::orderBy('view_count','DESC')->limit(8)->get();
         $related_posts = NewsPost::where('category_id',$news->id)->where('id','!=',$id)->limit(8)->get();
 
-        return view('backend.news.news_details_post',compact('news','tags_all','latest_posts','popular_posts','related_posts'));
+        return view('backend.news.news_details_post',compact('news','latest_posts','popular_posts','related_posts'));
     }
 
     public function cateWiseNews($id,$slug)

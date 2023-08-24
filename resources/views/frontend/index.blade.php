@@ -193,7 +193,15 @@
             search Here
          </div> --}}
 
+@php
+    $live_tv = App\Models\LiveTv::firstOrFail();
+ 
+/*     $liveUrl = $live_tv->live_url;
+    $videoCode = substr(strrchr($liveUrl, '='), 1); */
+    
+@endphp
 
+{{-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/g5GMBu5iWaU?si=5s3Z0Fc4tFeYlxzg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> --}}
             {{-- Search Option to search News From Here End --}}
             <div class="col-lg-3 col-md-4">
                 <div class="live-item">
@@ -203,7 +211,7 @@
                     </div>
                     <div class="popup-wrpp">
                         <div class="live_image">
-                            <img width="700" height="400" src="assets/images/lazy.jpg"
+                            <img width="700" height="400" src="{{ asset($live_tv->live_image) }}"
                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""
                                 loading="lazy">
                             <div data-mfp-src="#mymodal" class="live-icon modal-live"> <i class="las la-play"></i>
@@ -214,8 +222,7 @@
                                 aria-describedby="modal-contents">
                                 <div id="modal-contents">
                                     <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
-                                        <iframe class="" src=" " allowfullscreen="allowfullscreen" width="100%"
-                                            height="400px"></iframe>
+                                       {{ $live_tv->live_url }}
                                     </div>
                                 </div>
                             </div>
@@ -279,11 +286,6 @@
                             </div>
                             @endforeach
 
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -294,9 +296,7 @@
                     <h3 style="margin-top:5px"> Our Like Page </h3>
                 </div>
                 <div class="facebook-content">
-                    <iframe src=" " width="260" height="170" style="border:none;overflow:hidden" scrolling="no"
-                        frameborder="0" allowfullscreen="true"
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                    <div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="timeline" data-width="" data-height="200" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div>
                 </div>
                 <div class="themesBazar_widget">
                     <h3 style="margin-top:5px"> Our Like Page </h3>

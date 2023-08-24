@@ -30,7 +30,7 @@ class NewsPost extends Model
      * Get all of the NewsPost that are assigned this tag.
      */
 
-    public function tags() // it's an optional
+    public function tags() : MorphToMany // it's an optional
     {
        return $this->morphToMany(Tag::class,'taggable');
     }

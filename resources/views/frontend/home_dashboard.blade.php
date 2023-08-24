@@ -43,6 +43,13 @@ img.emoji {
 	padding: 0 !important;
 }
 
+.zoomContainer {
+    width: 400px;
+    height: 300px;
+    border: 2px solid #ccc;
+    overflow: hidden;
+}
+
 </style>
 <link rel="stylesheet" id="wp-block-library-css" href="{{ asset('frontend/assets/css/style.min.css') }}" media="all"> 
 <link rel="stylesheet" id="contact-form-7-css" href="{{ asset('frontend/assets/css/styles.css') }}" media="all">
@@ -65,7 +72,12 @@ img.emoji {
 
 </head>
 <body class="home blog" oncontextmenu="return true" data-new-gr-c-s-check-loaded="14.1078.0" data-gr-ext-installed="">
- 
+
+	{{-- Facebook Like Page Developer SDK  --}}
+	<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=6230725350287436&autoLogAppEvents=1" nonce="S46LH8sR"></script>
+
+
 <div class="main_website">
 
 	
@@ -96,7 +108,19 @@ img.emoji {
 <script src="{{ asset('frontend/assets/js/lazyload.min.js') }}" id="newsflash-lazyload-js"></script>
 <script src="{{ asset('frontend/assets/js/iziToast.min.js') }}" id="newsflash-main-js"></script>
 <script src="{{ asset('frontend/assets/js/main.js') }}" id="newsflash-main-js"></script>
+<!-- In your layout.blade.php or similar file -->
 
 <script src="https://kit.fontawesome.com/97ff43f8ef.js" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.zoomable').elevateZoom({
+            zoomType: "inner",
+            cursor: "crosshair",
+            easing: true,
+            galleryActiveClass: "active",
+        });
+    });
+</script>
  </body> </html>

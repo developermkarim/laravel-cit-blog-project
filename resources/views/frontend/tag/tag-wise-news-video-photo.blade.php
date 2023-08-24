@@ -5,6 +5,30 @@
 @endphp
 @section('title', "News24 | tag / $TagName")
 
+<style>
+    .video-container {
+    position: relative;
+    overflow: hidden;
+    width: 640px; /* Set your desired initial width */
+    height: 360px; /* Set your desired initial height */
+}
+
+.video-container {
+    position: relative;
+    width: 560px; /* Adjust width and height according to your needs */
+    height: 315px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.video-container.zoomed {
+    width: 800px; /* Zoomed width */
+    height: 450px; /* Zoomed height */
+    transition: all 0.3s ease-in-out;
+}
+
+
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
@@ -38,15 +62,22 @@
                 </div>
 
 
-                <div class="archive-heading">
-                    <h2 class="themesBazar_cat01"> <i class="fa fa-newspaper-o"></i> News of Tag {{ $TagName }}
+              {{--   <div class="archive-heading">
+                    <h2 class="themesBazar_cat01"> <i class="fa fa-newspaper-o"></i> News of Tag ({{ $TagName }})
 
                     </h2>
-                </div>
+                </div> --}}
+                <div class="live_title">
+                    <a href="javascript:void(0);"><i class="fa fa-newspaper-o"></i> News of Tag ({{ $TagName }})
+  
+                      </a> 
+                      
+                    
+                  </div>
 
                 <div class="sec-one-item2">
                     <div class="row">
-                        
+
                         @if (isset($tagNews))
                         
                         @foreach ($tagNews as $news)
@@ -54,24 +85,26 @@
                             <div class="sec-one-wrpp2">
                                 <div class="secOne-news">
                                     <div class="secOne-image2">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset($news->image) }}"></a>
+                                        <img id="photo1" class="zoomable"
+                                                src="{{ asset($news->image) }}" data-zoom-image="{{ asset($news->image) }}">
                                     </div>
+                                    {{--  <img id="photo1" src="{{ asset('path_to_your_photo.jpg') }}" data-zoom-image="{{ asset('path_to_zoomed_photo.jpg') }}" class="zoomable"> --}}
+
                                     <h4 class="secOne-title2">
-                                        <a href=" ">{{ GoogleTranslate::trans($news->news_title,app()->getLocale()) }}
+                                        <a href="{{ url("news/post/details/$news->id/$news->news_title_slug") }}">{{ GoogleTranslate::trans($news->news_title,app()->getLocale()) }}
                                         </a>
                                     </h4>
                                 </div>
                                 <div class="cat-meta">
-                                    <a href=" "> <i class="lar la-newspaper"></i>
+                                     <i class="lar la-newspaper"></i>
                                         {{ date('d-m-Y',strtotime($news->created_at)) }}
-                                    </a>
                                 </div>
                             </div>
                         </div>  
                         @endforeach
 
-                        @else
+                       @endif
+                       @if(count($tagNews) < 1)
 
                         <div class="container my-5 p-3">
                             <div class="row justify-content-center">
@@ -97,10 +130,13 @@
                     </div>
 
 
-                    <div class="archive-heading">
-                        <h2 class="themesBazar_cat01"> <i class="fa fa-file-video-o"></i> Video Gallery of Tag {{ $TagName }}
+                  
+                    <div class="live_title">
+                      <a href="javascript:void(0);"><i class="fa fa-file-video-o"></i>   Video Gallery of Tag ({{ $TagName }})
     
-                        </h2>
+                        </a> 
+                        
+                      
                     </div>
 
                     <div class="sec-one-item2">
@@ -109,28 +145,60 @@
                             @if (isset($tagVideos))
                                 
                             @foreach ($tagVideos as $video)
-                            <div class="themesBazar-3 themesBazar-m2">
+
+
+                            <div class="live-item">
+  
+                                <div class="popup-wrpp">
+                                    <div class="live_image secOne-image2" style="width: 28%;display:inline-block">
+                                        <img src="{{ asset($video->video_image) }}"
+                                            class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""
+                                            loading="lazy">
+                                        <div data-mfp-src="#mymodal" class="live-icon modal-live"> <i class="las la-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="live-popup">
+                                        <div id="mymodal" class="mfp-hide" role="dialog" aria-labelledby="modal-titles"
+                                            aria-describedby="modal-contents">
+                                            <div id="modal-contents">
+                                                <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
+                                                    @php
+                                                    $youtubeUrl = $video->video_url;
+                                                    $videoCode = substr(strrchr($youtubeUrl, '='), 1);
+                                                     @endphp
+                                                        <iframe id="video1" width="auto" height="400px"  class="zoomable" src="https://www.youtube.com/embed/{{ $videoCode }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                   
+                                                </div>
+                                            </div>
+                                            <h4 class="secOne-title2">
+                                                <a href=" ">{{ GoogleTranslate::trans($video->video_title,app()->getLocale()) }}
+                                                </a>
+                                            </h4>
+                                            <div class="cat-meta">
+                                                <a href=" "> <i class="lar la-newspaper"></i>
+                                                    {{ date('d-m-Y',strtotime($video->post_date)) }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+
+{{--                             <div class="themesBazar-3 themesBazar-m2">
                                 <div class="sec-one-wrpp2">
                                     <div class="secOne-news">
                                         <div class="secOne-image2">
-                                            <a href="{{ $video->video_url }}"><img class="lazyload"
-                                                    src="{{ asset($video->video_image) }}"></a>
+                                                  
                                         </div>
-                                        <h4 class="secOne-title2">
-                                            <a href=" ">{{ GoogleTranslate::trans($video->video_title,app()->getLocale()) }}
-                                            </a>
-                                        </h4>
+                                        
                                     </div>
-                                    <div class="cat-meta">
-                                        <a href=" "> <i class="lar la-newspaper"></i>
-                                            {{ date('d-m-Y',strtotime($video->post_date)) }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>  
-                            @endforeach
 
-                            @else
+                                </div>
+                            </div> --}}  
+                            @endforeach
+                            @endif
+                            @if(count($tagVideos)  < 1)
 
                             <div class="container my-5 p-3">
                                 <div class="row justify-content-center">
@@ -157,12 +225,20 @@
 
 
 
-                        <div class="archive-heading">
-                            <h2 class="themesBazar_cat01"> <i class="fa fa-picture-o"></i> Photo Gallery of Tag {{ $TagName }}
+                      {{--   <div class="archive-heading">
+                            <h2 class="themesBazar_cat01"> <i class="fa fa-picture-o"></i> Photo Gallery of Tag ({{ $TagName }})
         
                             </h2>
                         </div>
-    
+                         --}}
+                        <div class="live_title">
+                            <a href="javascript:void(0);"><i class="fa fa-picture-o"></i> Photo Gallery of Tag ({{ $TagName }})
+          
+                              </a> 
+                              
+                            
+                          </div>
+
                         <div class="sec-one-item2">
                             <div class="row">
                                 @if (isset($tagPhotos))
@@ -171,8 +247,8 @@
                                     <div class="sec-one-wrpp2">
                                         <div class="secOne-news">
                                             <div class="secOne-image2">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset($photo->photo_gallery) }}"></a>
+                                                <img id="photo1" class="zoomable"
+                                                src="{{ asset($photo->photo_gallery) }}" data-zoom-image="{{ asset($photo->photo_gallery) }}">
                                             </div>
                                            
                                         </div>
@@ -184,13 +260,13 @@
                                     </div>
                                 </div>  
                                 @endforeach
-                                @else
-
+                                @endif
+                                @if(count($tagPhotos)  < 1)
                                 
                                 <div class="container my-5 p-3">
                                     <div class="row justify-content-center">
                                         <div class="col-md-6">
-                                            <div class="alert alert-dark text-center p-3">
+                                            <div class="alert text-center p-3" style="background-color: #474d5216">
                                                 <h4 class="alert-heading">Sorry! No Photo is Available for The Tag</h4>
                                                 <p class="mb-0">Please explore other content or try a different tag.</p>
                                             </div>
@@ -407,4 +483,27 @@
 
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        var $iframe = $('#youtube-iframe');
+        var $container = $('.video-container');
+        var $zoomButton = $('#zoom-button');
+
+        $zoomButton.click(function() {
+            $container.toggleClass('zoomed');
+        });
+
+        // Close the zoomed-in video when clicking outside of it
+        $(document).click(function(event) {
+            if (!$container.is(event.target) && $container.has(event.target).length === 0) {
+                $container.removeClass('zoomed');
+            }
+        });
+    });
+</script>
+
 @endsection
