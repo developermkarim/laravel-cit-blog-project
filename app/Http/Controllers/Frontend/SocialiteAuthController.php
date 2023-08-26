@@ -8,6 +8,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class SocialiteAuthController extends Controller
 {
@@ -16,12 +17,29 @@ class SocialiteAuthController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function handleFacebookCallback()
+    public function handleFacebookRedirect()
 {
     $user = Socialite::driver('facebook')->user();
-    // Handle user authentication and data storage
+        
+    // Check if the user exists in your database
+    $existingUser = User::where('email', $user->email)->first();
+
+    if ($existingUser) {
+        Auth::login($existingUser);
+        return redirect('/');
+    } else {
+        // Create a new user and login
+        $newUser = new User();
+        $newUser->name = $user->name;
+        $newUser->email = $user->email;
+        $newUser->password = bcrypt(Str::random(16)); // Set a random password
+        $newUser->save();
+        $newUser->assignRole('Editor');
+        Auth::login($newUser);
+        return redirect('/');
 }
 
+}
 
 /*  Auth with Github */
 
@@ -43,12 +61,36 @@ $newUser = User::UpdateOrCreate(
     ]
 );
 
-$newUser->assignRole('editor');
+$newUser->assignRole('Editor');
 
 Auth::login($newUser);
 return redirect('/');
 
 }
 
+public function redirectToGoogle()
+{
+    return Socialite::driver('google')->redirect();
+}
+
+
+public function handleGoogleRedirect()
+{
+    $user = Socialite::driver('google')->stateless()->user();
+
+    $googleNewUser = User::updateOrCreate(
+        [
+            'email'=>$user->email,
+        ],
+        [
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'password'=>Hash::make($user->password),
+        ]
+    );
+    $googleNewUser->assignRole('Reporter');
+    Auth::login($googleNewUser);
+    return redirect('/');
+}
 
 }

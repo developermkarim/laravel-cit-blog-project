@@ -22,7 +22,7 @@
 		<div class="social-btn text-center">
 			<a href="#" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i> Facebook</a>
 			<a href="{{ url('/login/github') }}" class="btn btn-dark btn-lg"><i class="fa fa-github"></i> Github</a>
-			<a href="#" class="btn btn-danger btn-lg"><i class="fa fa-google"></i> Google</a>
+			<a href="{{ url('/login/google') }}" class="btn btn-danger btn-lg"><i class="fa fa-google"></i> Google</a>
 		</div>
 		<div class="or-seperator"><b>or</b></div>
         <div class="form-group">

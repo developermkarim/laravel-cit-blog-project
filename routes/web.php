@@ -431,8 +431,14 @@ Route::post('contact/previous',[ContactController::class,'StoreContactData'])->n
 
 Route::controller(SocialiteAuthController::class)->group(function(){
 
-    Route::get('/login/github/', 'redirectToGithub');
+    Route::get('/login/github', 'redirectToGithub');
     Route::get('/login/github/callback/','handleGithubCallback');
+
+    Route::get('/login/google', 'redirectToGoogle');
+    Route::get('/login/google/redirect','handleGoogleRedirect');
+
+    Route::get('/login/facebook/', 'redirectToFacebook');
+    Route::get('/login/facebook/redirect','handleFacebookRedirect');
 });
 /* Route::get('contact/check',function(){
     $admin =   App\Models\User::where(['status'=>1])->where(['role'=>'admin'])->get();
